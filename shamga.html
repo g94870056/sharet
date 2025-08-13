@@ -54,7 +54,7 @@ canvas { display: block; }
     transition: transform 0.2s, box-shadow 0.2s;
     width: 100%;
     max-width: 300px;
-    white-space: nowrap; 
+    white-space: nowrap;
 }
 #playButton:hover, #skinsButton:hover, #restartButton:hover, #returnToMenuButton:hover, #closeSkinsButton:hover, #toggle-versions:hover, #death-modal-content button:hover, #skins-modal-content button:hover, #mobile-controls-toggle:hover, #current-difficulty:hover {
     transform: scale(1.00);
@@ -68,7 +68,7 @@ canvas { display: block; }
     align-items: center;
     margin-bottom: 10px;
     width: 100%;
-    max-width: 350px; 
+    max-width: 350px;
 }
 
 .difficulty-button {
@@ -95,15 +95,15 @@ canvas { display: block; }
 
 #difficulty-options {
     display: flex;
-    flex-direction: row; 
-    justify-content: center; 
+    flex-direction: row;
+    justify-content: center;
     gap: 10px;
     width: 100%;
     margin-top: 5px;
 }
 
 .difficulty-tab {
-    width: auto; 
+    width: auto;
     padding: 2px 3px;
     font-size: 1em;
     cursor: pointer;
@@ -131,7 +131,7 @@ canvas { display: block; }
 
 
 #hud {
-    position: absolute;
+    position: fixed;
     top: 20px;
     left: 20px;
     color: white;
@@ -148,7 +148,7 @@ canvas { display: block; }
     backdrop-filter: blur(5px);
 }
 #health-bar {
-    position: absolute;
+    position: fixed;
     bottom: 20px;
     left: 20px;
     width: 220px;
@@ -244,7 +244,7 @@ canvas { display: block; }
     display: grid;
     
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 15px; 
+    gap: 15px;
 }
 
 .skin-item {
@@ -253,11 +253,11 @@ canvas { display: block; }
     border-radius: 8px;
     background-color: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    transition: background-color 0.3s;
+    transition: background-color: 0.3s;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between; 
+    justify-content: space-between;
 }
 
 
@@ -329,14 +329,16 @@ canvas { display: block; }
 	margin-top: 20px;
     text-shadow: 1px 1px 2px #00ffff;
 }
+
 .hud-container {
-    display: flex;
+    display: none; 
     align-items: center;
     gap: 15px;
-	position: absolute;
-    top: 850px;
-    left: 900px;
+	position: fixed;
+    bottom: 10px;    
+    left: 880px;      
 }
+
 .weapon-slot {
     position: relative;
     width: 90px;
@@ -620,7 +622,7 @@ button {
     bottom: 115px;
 }
 
-#weapon1-button, #weapon2-button {
+#weapon1-button, #weapon2-button, #weapon3-button {
     width: 60px;
     height: 60px;
     display: flex;
@@ -638,15 +640,22 @@ button {
     bottom: 170px;
 }
 
+#weapon3-button {
+    background-color: rgba(0, 255, 255, 0.4);
+    right: 35px;
+    bottom: 185px; 
+}
+
+
 #mobile-hud {
-    position: absolute;
+    position: fixed;
     top: 10px;
     left: 10px;
     color: white;
     font-size: 14px;
     display: none;
-    flex-direction: column; 
-    gap: 5px; 
+    flex-direction: column;
+    gap: 5px;
     z-index: 1;
     border: 2px solid cyan;
     padding: 10px;
@@ -659,10 +668,10 @@ button {
 }
 
 #mobile-health-bar {
-    position: absolute;
-    left: 50%; 
-    bottom: 10px; 
-    transform: translateX(-50%); 
+    position: fixed;
+    left: 50%;
+    bottom: 10px;
+    transform: translateX(-50%);
     width: 120px;
     height: 15px;
     background-color: rgba(255, 0, 0, 0.6);
@@ -687,7 +696,7 @@ button {
 }
 
 .mobile-hud-container {
-    display: none !important; 
+    display: none !important;
 }
 
 .mobile-weapon-slot {
@@ -741,27 +750,34 @@ button {
     text-align: center;
 }
 
-@media (max-width: 768px) {
+@media (orientation: portrait) and (max-width: 768px) {
     #version {
-        top: 10px;
-        right: 10px;
-        bottom: auto;
-        font-size: 12px;
+        font-size: 6px; 
+        padding: 1px 3px;   
     }
+}
+
+@media (orientation: landscape) and (max-width: 920px) { 
+    #version {
+        font-size: 8px; 
+        padding: 2px 4px;   
+    }
+}
+
     
     #menu {
-        padding: 20px 15px; 
+        padding: 20px 15px;
     }
 
     #menu h1 {
-        font-size: 1.8em; 
-        margin-bottom: 15px; 
+        font-size: 1.8em;
+        margin-bottom: 15px;
     }
     
     #playButton, #skinsButton, #restartButton, #returnToMenuButton, #closeSkinsButton, #toggle-versions, #death-modal-content button, #skins-modal-content button, #mobile-controls-toggle, #current-difficulty, .difficulty-button {
         font-size: 1em;
-        padding: 8px 15px; 
-        margin: 5px 0; 
+        padding: 8px 15px;
+        margin: 5px 0;
     }
     
     .difficulty-tab {
@@ -833,6 +849,44 @@ button {
     }
 }
 
+@media (orientation: landscape) and (max-height: 500px) {
+    #action-buttons {
+        width: 250px;
+        height: 160px;
+    }
+    #shoot-button {
+        right: 0px;
+        bottom: 0px;
+        width: 80px;
+        height: 80px;
+    }
+    #jump-button {
+        right: 90px;
+        bottom: 5px;
+        width: 70px;
+        height: 70px;
+    }
+    #reload-button {
+        right: 170px;
+        bottom: 5px;
+        width: 70px;
+        height: 70px;
+    }
+    #weapon1-button {
+        right: 170px;
+        bottom: 85px;
+    }
+    #weapon2-button {
+        right: 90px;
+        bottom: 85px;
+    }
+    #weapon3-button {
+        right: 10px;
+        bottom: 85px;
+    }
+}
+
+
 @media (max-width: 920px) and (max-height: 450px) {
     #menu {
         padding: 10px 20px;
@@ -869,6 +923,10 @@ button {
       </tr>
     </thead>
     <tbody>
+	<tr>
+        <td>0.0.1.1</td>
+        <td>M16-update</td>
+      </tr>
 	<tr>
         <td>0.0.1.0</td>
         <td>mobile-update</td>
@@ -914,7 +972,7 @@ button {
 </div>
         <h1>Кибершамыга</h1>
         
-        <!-- ИЗМЕНЕННЫЙ БЛОК ВЫБОРА СЛОЖНОСТИ -->
+        
         <div id="difficulty-selector">
             <button id="difficulty-toggle" class="difficulty-button">Выбор сложности</button>
             <div id="difficulty-options" style="display: none;">
@@ -923,7 +981,7 @@ button {
                 <button class="difficulty-tab" data-difficulty="hard">Сложный</button>
             </div>
         </div>
-        <!-- КОНЕЦ БЛОКА -->
+        
 
         <button id="playButton">Играть</button>
         <button id="mobile-controls-toggle">Мобильное управление:Выкл</button>
@@ -946,19 +1004,23 @@ button {
     </div>
 </div>
 <div id="hud">
-<div class="hud-container">
-        <div id="weapon1" class="weapon-slot">
-            <img src="https://i.postimg.cc/cL1Ccm2P/image.webp" alt="Gun">
-            <div class="weapon-number">1</div>
-        </div>
-        <div id="weapon2" class="weapon-slot" style="display: none;">
-            <img src="https://i.postimg.cc/sgDyZcbL/image-1.webp" alt="Vape">
-            <div class="weapon-number">2</div>
-        </div>
-    </div>
     <div>Время: <span id="time">00:00</span></div>
     <div>Киллы: <span id="kills">0</span></div>
     <div>Патроны: <span id="ammo"></span></div>
+</div>
+<div class="hud-container">
+    <div id="weapon1" class="weapon-slot">
+        <img src="https://i.postimg.cc/cL1Ccm2P/image.webp" alt="Gun">
+        <div class="weapon-number">1</div>
+    </div>
+    <div id="weapon2" class="weapon-slot" style="display: none;">
+        <img src="https://i.postimg.cc/sgDyZcbL/image-1.webp" alt="Vape">
+        <div class="weapon-number">2</div>
+    </div>
+    <div id="weapon3" class="weapon-slot">
+        <img src="https://i.postimg.cc/BbBV8LkH/3333.png" alt="M16">
+        <div class="weapon-number">3</div>
+    </div>
 </div>
 <div id="health-bar">
     <div id="health">88%</div>
@@ -972,6 +1034,10 @@ button {
         <div id="mobile-weapon2" class="mobile-weapon-slot" style="display: none;">
             <img src="https://i.postimg.cc/sgDyZcbL/image-1.webp" alt="Vape">
             <div class="mobile-weapon-number">2</div>
+        </div>
+		<div id="mobile-weapon3" class="mobile-weapon-slot">
+            <img src="https://i.postimg.cc/BbBV8LkH/3333.png" alt="M16">
+            <div class="mobile-weapon-number">3</div>
         </div>
     </div>
     <div>Время: <span id="mobile-time">00:00</span></div>
@@ -989,6 +1055,7 @@ button {
         </div>
     </div>
     <div id="action-buttons" class="mobile-control-group">
+        <div class="action-button" id="weapon3-button"><img src="https://i.postimg.cc/BbBV8LkH/3333.png" alt="M16"></div>
         <div class="action-button" id="weapon2-button"><img src="https://i.postimg.cc/sgDyZcbL/image-1.webp" alt="Vape"></div>
         <div class="action-button" id="weapon1-button"><img src="https://i.postimg.cc/cL1Ccm2P/image.webp" alt="Gun"></div>
         <div class="action-button" id="reload-button">R</div>
@@ -996,207 +1063,176 @@ button {
         <div class="action-button" id="shoot-button">🔥</div>
     </div>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/three@0.148/build/three.min.js"></script>
+
+
+<script type="importmap">
+    {
+        "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@0.148/build/three.module.js",
+            "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.148/examples/jsm/"
+        }
+    }
+</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/18.6.4/tween.umd.js"></script>
-<script>
-let gameScene, gameCamera, gameRenderer, playerObject;
 
-let currentPlayerHealth = 100;
-let baseEnemyHealth = 25;
-let currentEnemyDamage = 2;
-let baseBossHealth = 100;
-let currentBossDamage = 2;
-let currentBossLevel = 1;
-let isBossAlreadySpawned = false;
-let timeToNextBossSpawn = 300;
+<script type="module">
 
-let currentBulletSpeed = 50.0;
-let gameStartTimeEpoch;
-let gameEndTimeEpoch;
+import * as THREE from 'three';
+import { FBXLoader } from 'three/addons/loaders/FBXLoader.js';
+import { RGBELoader } from 'three/addons/loaders/RGBELoader.js';
+import { OBJLoader } from 'three/addons/loaders/OBJLoader.js';
+import { MTLLoader } from 'three/addons/loaders/MTLLoader.js';
 
-let killCount = 0;
-let recordKillCount = 0;
-
-let gunMuzzleFlash;
-let muzzleFlashCurrentDuration = 0;
-let muzzleFlashEndTimeEpoch = 0;
-
-let gunMagazineSize = 10;
-let currentGunAmmo = gunMagazineSize;
-let displayedGunAmmo = gunMagazineSize;
-let isGunReloading = false;
+let gameScene, weaponScene, gameCamera, weaponCamera, gameRenderer, playerObject;
+let gameClock = new THREE.Clock();
+let logicalMuzzle;
 
 let isGameCurrentlyActive = false;
-let isMouseButtonDown = false;
-let shootIntervalTimerId = null;
-let lastGunShotTime = 0;
-const gunShotInterval = 0.2;
+let killCount = 0;
+let recordKillCount = 0;
+let gameStartTimeEpoch;
+let gameEndTimeEpoch;
+let isPointerLocked = false;
+let previousFrameTime = performance.now();
 
+let currentPlayerHealth = 100;
 let isPlayerJumping = false;
 let canPlayerJump = true;
 const playerJumpStrength = 10.0;
 const gameGravity = 20.0;
-
-let currentDifficulty = 'medium'; 
-const difficultySettings = {
-    easy: { name: "Легкий", enemyHealth: 5, bossHealth: 50 },
-    medium: { name: "Средний", enemyHealth: 15, bossHealth: 100 },
-    hard: { name: "Сложный", enemyHealth: 25, bossHealth: 300 }
-};
-
-let weaponSkins = {
-    default: {
-        name: "Стандартный",
-        unlocked: true,
-        model: null,
-        type: "weapon"
-    },
-    golden: {
-        name: "Золотой",
-        unlocked: false,
-        model: null,
-        type: "weapon"
-    }
-};
-
-let hudSkins = {
-    default: {
-        name: "Стандартный HUD",
-        unlocked: true,
-		requiredKills: 0,
-        colors: {
-            border: "cyan",
-            background: "rgba(100, 149, 237, 0.7)",
-            health: "linear-gradient(to right, green, limegreen)",
-            healthBg: "rgba(255, 0, 0, 0.6)",
-            text: "white",
-            healthBorder: "cyan"
-        }
-    },
-    neon: {
-        name: "Кибершамыга 2 HUD",
-        unlocked: false,
-		requiredKills: 100,
-        colors: {
-            border: "#00ffff",
-            background: "rgba(0, 0, 51, 0.8)",
-            health: "linear-gradient(to right, #00ff00, #00ffff)",
-            healthBg: "rgba(51, 0, 51, 0.7)",
-            text: "#006ebd",
-            healthBorder: "#00ffff"
-        }
-    },
-    retro: {
-        name: "Классик HUD",
-        unlocked: false,
-		requiredKills: 500,
-        colors: {
-            border: "#ffff00",
-            background: "rgba(139, 69, 19, 0.8)",
-            health: "linear-gradient(to right, #32cd32, #90ee90)",
-            healthBg: "rgba(139, 0, 0, 0.7)",
-            text: "#ffff00",
-            healthBorder: "#ffff00"
-        }
-    },
-    futuristic: {
-        name: "Кибертанк HUD",
-        unlocked: false,
-		requiredKills: 1000,
-        colors: {
-            border: "#ffffff",
-            background: "rgba(0, 10, 30, 0.9)",
-            health: "linear-gradient(to right, #00ffaa, #ccffff)",
-            healthBg: "rgba(0, 51, 102, 0.8)",
-            text: "#ffffff",
-            healthBorder: "#ffffff"
-        }
-    },
-    military: {
-        name: "Вартандер HUD",
-        unlocked: false,
-		requiredKills: 5000,
-        colors: {
-            border: "#8fbc8f",
-            background: "rgba(51, 51, 51, 0.9)",
-            health: "linear-gradient(to right, #8fbc8f, #cceecc)",
-            healthBg: "rgba(58, 58, 58, 0.8)",
-            text: "#f0e68c",
-            healthBorder: "#8fbc8f"
-        }
-    }
-};
-
-let currentWeaponSkin = 'default';
-let currentHudSkin = 'default';
-
-let gunReloadAnimationProgress = 0;
-let isGunAnimatingReload = false;
-const gunReloadAnimationDuration = 1.5;
-
-const gameEnemies = [];
-let gameBoss = null;
-let bossWeaponGroup = null;
-let bossLastFireTime = 0;
-const bossFireInterval = 2;
-let currentEnemySpeed = 5.0;
-let maxActiveEnemies = 25;
-let lastDifficultyIncreaseGameTime;
-
-const gameBullets = [];
-let playerGameBullets = [];
-
-let gameTileSize = 150;
-let gameTiles = {};
-let gameTileMeshes = {};
-const gameTrees = [];
-let gameTreeMeshes = {};
-let gameTreeInstances = {};
-
-const skinsButtonElement = document.getElementById('skinsButton');
-const skinsModalElement = document.getElementById('skins-modal');
-const closeSkinsButtonElement = document.getElementById('closeSkinsButton');
-
-skinsButtonElement.addEventListener('click', function(event) {
-    event.stopPropagation();
-    skinsModalElement.style.display = 'flex';
-    updateSkinsMenuDisplay();
-});
-closeSkinsButtonElement.addEventListener('click', function(event) {
-    event.stopPropagation();
-    skinsModalElement.style.display = 'none';
-});
-
-let gunWeaponGroup, gunWeaponBody, gunWeaponMagazine;
-let vapeWeaponGroup;
-let vapeWeaponAmmo = 25;
-let currentVapeWeaponAmmo = vapeWeaponAmmo;
-const vapeAmmoRegenerationRate = 5;
-let gameClock = new THREE.Clock();
-let currentEquippedWeaponId = '';
-let bossDroppedVapeWeapon = null;
-let hasPlayerPickedUpVapeWeapon = false;
-
-const availableWeapons = [
-  { id: 'weapon1', name: 'Gun',     equipped: false  },
-  { id: 'weapon2', name: 'Vape',    equipped: false },
-];
-
-let isDigitKey1Pressed = false;
-let isDigitKey2Pressed = false;
-
-let isMobileControlsEnabled = false;
-let joystickDeltaX = 0;
-let joystickDeltaY = 0;
-let isJoystickActive = false;
+const playerVelocity = new THREE.Vector3();
+const playerDirection = new THREE.Vector3();
 
 let isMovingForward = false;
 let isMovingBackward = false;
 let isMovingLeft = false;
 let isMovingRight = false;
-const playerVelocity = new THREE.Vector3();
-const playerDirection = new THREE.Vector3();
+let isDigitKey1Pressed = false;
+let isDigitKey2Pressed = false;
+let isDigitKey3Pressed = false; 
+let isMouseButtonDown = false;
+let shootIntervalTimerId = null;
 
+let isMobileControlsEnabled = false;
+let joystickDeltaX = 0;
+let joystickDeltaY = 0;
+let isJoystickActive = false;
+let lookTouchIdentifier = null;
+let lookTouchLastX = 0;
+let lookTouchLastY = 0;
+
+let currentDifficulty = 'medium';
+const difficultySettings = {
+    easy: { name: "Легкий", enemyHealth: 5, bossHealth: 50 },
+    medium: { name: "Средний", enemyHealth: 15, bossHealth: 100 },
+    hard: { name: "Сложный", enemyHealth: 25, bossHealth: 300 }
+};
+let baseEnemyHealth = 25;
+let currentEnemyDamage = 2;
+let currentEnemySpeed = 5.0;
+let maxActiveEnemies = 25;
+const gameEnemies = [];
+let lastDifficultyIncreaseGameTime;
+
+let gameBoss = null;
+let bossWeaponGroup = null;
+let baseBossHealth = 100;
+let bossHealth; 
+let currentBossDamage = 2;
+let currentBossLevel = 1;
+let isBossAlreadySpawned = false;
+let timeToNextBossSpawn = 300; 
+let bossLastFireTime = 0;
+const bossFireInterval = 2; 
+
+const gameBullets = [];
+let playerGameBullets = [];
+let currentBulletSpeed = 50.0;
+
+let gameTileSize = 150;
+let gameTiles = {};
+let gameTileMeshes = {};
+const gameTrees = [];
+let gameTreeInstances = {};
+
+let weaponSkins = {
+    default: { name: "Стандартный", unlocked: true, model: null, type: "weapon" },
+    golden: { name: "Золотой", unlocked: true, model: null, type: "weapon" }
+};
+let hudSkins = {
+    default: { name: "Стандартный HUD", unlocked: true, requiredKills: 0, colors: { border: "cyan", background: "rgba(100, 149, 237, 0.7)", health: "linear-gradient(to right, green, limegreen)", healthBg: "rgba(255, 0, 0, 0.6)", text: "white", healthBorder: "cyan" }},
+    neon: { name: "Кибершамыга 2 HUD", unlocked: false, requiredKills: 100, colors: { border: "#00ffff", background: "rgba(0, 0, 51, 0.8)", health: "linear-gradient(to right, #00ff00, #00ffff)", healthBg: "rgba(51, 0, 51, 0.7)", text: "#006ebd", healthBorder: "#00ffff" }},
+    retro: { name: "Классик HUD", unlocked: false, requiredKills: 500, colors: { border: "#ffff00", background: "rgba(139, 69, 19, 0.8)", health: "linear-gradient(to right, #32cd32, #90ee90)", healthBg: "rgba(139, 0, 0, 0.7)", text: "#ffff00", healthBorder: "#ffff00" }},
+    futuristic: { name: "Кибертанк HUD", unlocked: false, requiredKills: 1000, colors: { border: "#ffffff", background: "rgba(0, 10, 30, 0.9)", health: "linear-gradient(to right, #00ffaa, #ccffff)", healthBg: "rgba(0, 51, 102, 0.8)", text: "#ffffff", healthBorder: "#ffffff" }},
+    military: { name: "Вартандер HUD", unlocked: false, requiredKills: 5000, colors: { border: "#8fbc8f", background: "rgba(51, 51, 51, 0.9)", health: "linear-gradient(to right, #8fbc8f, #cceecc)", healthBg: "rgba(58, 58, 58, 0.8)", text: "#f0e68c", healthBorder: "#8fbc8f" }}
+};
+let currentWeaponSkin = 'default';
+let currentHudSkin = 'default';
+let currentEquippedWeaponId = '';
+const availableWeapons = [
+  { id: 'weapon1', name: 'Gun',     equipped: false  },
+  { id: 'weapon2', name: 'Vape',    equipped: false },
+  { id: 'weapon3', name: 'M16A2',   equipped: true }, 
+];
+let bossDroppedVapeWeapon = null;
+let hasPlayerPickedUpVapeWeapon = false;
+
+let gunWeaponGroup, gunWeaponBody, gunWeaponMagazine;
+let gunMuzzleFlash;
+let muzzleFlashEndTimeEpoch = 0;
+let gunMagazineSize = 10;
+let currentGunAmmo = gunMagazineSize;
+let displayedGunAmmo = gunMagazineSize;
+let isGunReloading = false;
+let lastGunShotTime = 0;
+const gunShotInterval = 0.2;
+let gunReloadAnimationProgress = 0;
+let isGunAnimatingReload = false;
+const gunReloadAnimationDuration = 1.5;
+
+let vapeWeaponGroup;
+let vapeWeaponAmmo = 25;
+let currentVapeWeaponAmmo = vapeWeaponAmmo;
+const vapeAmmoRegenerationRate = 5;
+
+let m16WeaponGroup;
+let m16MuzzleFlash;
+let m16Magazine;
+let m16MagazineOriginalParent = null;
+let m16MagazineOriginalPosition = new THREE.Vector3();
+let m16MuzzleFlashEndTimeEpoch = 0;
+let m16MagazineSize = 30;
+let currentM16Ammo = m16MagazineSize;
+let displayedM16Ammo = m16MagazineSize;
+let isM16Reloading = false;
+let lastM16ShotTime = 0;
+const m16ShotInterval = 0.075;
+const m16ReloadAnimationDuration = 1.5;
+
+const skinsButtonElement = document.getElementById('skinsButton');
+const skinsModalElement = document.getElementById('skins-modal');
+const closeSkinsButtonElement = document.getElementById('closeSkinsButton');
+const toggleVersionButton = document.getElementById('toggle-versions');
+const versionInfoDisplayElement = document.getElementById('version-info');
+const restartButtonElement = document.getElementById('restartButton');
+const returnToMenuButtonElement = document.getElementById('returnToMenuButton');
+const menuContainerElement = document.getElementById('menu-container');
+const playButtonElement = document.getElementById('playButton');
+
+
+function updateCameraFov() {
+    if (!gameCamera) return; 
+
+    const fov = isMobileControlsEnabled && window.innerHeight > window.innerWidth ? 105 : 75;
+    
+    gameCamera.fov = fov;
+    gameCamera.updateProjectionMatrix();
+    
+    if (weaponCamera) {
+        weaponCamera.fov = fov;
+        weaponCamera.updateProjectionMatrix();
+    }
+}
 
 const setActiveDifficultyTab = (selectedDifficulty) => {
     currentDifficulty = selectedDifficulty;
@@ -1210,185 +1246,33 @@ const setActiveDifficultyTab = (selectedDifficulty) => {
     });
 };
 
-document.addEventListener('DOMContentLoaded', () => {
-    const versionInfoElement = document.getElementById('version-info');
-    const playButtonElement = document.getElementById('playButton');
-    playButtonElement.addEventListener('click', () => {
-        versionInfoElement.style.display = 'none';
-    });
-
-    const mobileControlsToggle = document.getElementById('mobile-controls-toggle');
-    mobileControlsToggle.addEventListener('click', function() {
-        isMobileControlsEnabled = !isMobileControlsEnabled;
-        this.textContent = `Мобильное управление: ${isMobileControlsEnabled ? 'Вкл' : 'Выкл'}`;
-    });
-
-    
-    const difficultyToggle = document.getElementById('difficulty-toggle');
-    const difficultyOptions = document.getElementById('difficulty-options');
-    const difficultyTabs = document.querySelectorAll('.difficulty-tab');
-
-    
-    difficultyToggle.addEventListener('click', () => {
-        if (difficultyOptions.style.display === 'none' || difficultyOptions.style.display === '') {
-            difficultyOptions.style.display = 'flex';
-        } else {
-            difficultyOptions.style.display = 'none';
-        }
-    });
-
-    
-    difficultyTabs.forEach(tab => {
-        tab.addEventListener('click', (event) => {
-            const selectedDifficulty = event.target.dataset.difficulty;
-            setActiveDifficultyTab(selectedDifficulty);
-        });
-    });
-
-    setActiveDifficultyTab('medium');
-});
-
-
- const toggleVersionButton = document.getElementById('toggle-versions');
-const versionInfoDisplayElement = document.getElementById('version-info');
-
-toggleVersionButton.addEventListener('click', () => {
-  if (versionInfoDisplayElement.style.display === 'none' || !versionInfoDisplayElement.style.display) {
-    versionInfoDisplayElement.style.display = 'block';
-    toggleVersionButton.textContent = 'Скрыть версии';
-  } else {
-    versionInfoDisplayElement.style.display = 'none';
-    toggleVersionButton.textContent = 'Показать версии';
-  }
-});
-
-document.addEventListener('keydown', function(event) {
-    if (!isGameCurrentlyActive || isMobileControlsEnabled) return;
-
-    if (
-        event.code === 'KeyW' ||
-        event.code === 'KeyA' ||
-        event.code === 'KeyS' ||
-        event.code === 'KeyD' ||
-        event.code === 'KeyR' ||
-        event.code === 'Space'
-    ) {
-        event.preventDefault();
-    }
-	
-    switch (event.code) {
-        case 'KeyW':
-            isMovingForward = true;
-            break;
-        case 'KeyS':
-            isMovingBackward = true;
-            break;
-        case 'KeyA':
-            isMovingLeft = true;
-            break;
-        case 'KeyD':
-            isMovingRight = true;
-            break;
-        case 'KeyR':
-            reloadGun();
-            break;
-        case 'Space':
-            if (canPlayerJump && !isPlayerJumping) {
-                isPlayerJumping = true;
-                canPlayerJump = false;
-                playerVelocity.y = playerJumpStrength;
-            }
-            break;
-    }
-	
-	if (event.code === 'Digit1') {
-        const weapon1 = availableWeapons.find(weapon => weapon.id === 'weapon1');
-        if (!weapon1) return;
-
-        if (!isDigitKey1Pressed || weapon1.equipped) {
-            weapon1.equipped = !weapon1.equipped;
-            if (weapon1.equipped) {
-                currentEquippedWeaponId = 'weapon1';
-            } else {
-                currentEquippedWeaponId = '';
-            }
-
-            const weapon2 = availableWeapons.find(weapon => weapon.id === 'weapon2');
-            if (hasPlayerPickedUpVapeWeapon && weapon2.equipped) {
-                weapon2.equipped = false;
-            }
-
-            updateHUDDisplay();
-        }
-
-        isDigitKey1Pressed = true;
-    } else if (event.code === 'Digit2' && hasPlayerPickedUpVapeWeapon) {
-        const weapon2 = availableWeapons.find(weapon => weapon.id === 'weapon2');
-        if (!weapon2) return;
-
-        if (!isDigitKey2Pressed || weapon2.equipped) {
-            weapon2.equipped = !weapon2.equipped;
-            if (weapon2.equipped) {
-                currentEquippedWeaponId = 'weapon2';
-            } else {
-                currentEquippedWeaponId = '';
-            }
-
-            const weapon1 = availableWeapons.find(weapon => weapon.id === 'weapon1');
-            if (weapon1.equipped) {
-                weapon1.equipped = false;
-            }
-
-            updateHUDDisplay();
-        }
-
-        isDigitKey2Pressed = true;
-    }
-});
-
-document.addEventListener('keyup', function(event) {
-    if (!isGameCurrentlyActive || isMobileControlsEnabled) return;
-
-    if (
-        event.code === 'KeyW' ||
-        event.code === 'KeyA' ||
-        event.code === 'KeyS' ||
-        event.code === 'KeyD'
-    ) {
-        event.preventDefault();
-    }
-    switch (event.code) {
-        case 'KeyW':
-            isMovingForward = false;
-            break;
-        case 'KeyS':
-            isMovingBackward = false;
-            break;
-        case 'KeyA':
-            isMovingLeft = false;
-            break;
-        case 'KeyD':
-            isMovingRight = false;
-            break;
-    }
-	
-	if (event.code === 'Digit1') {
-        isDigitKey1Pressed = false;
-    } else if (event.code === 'Digit2') {
-        isDigitKey2Pressed = false;
-    }
-});
-
 function setEquippedWeapon(weaponId) {
-  if (currentEquippedWeaponId === weaponId) {
-    currentEquippedWeaponId = '';
-  } else {
-    currentEquippedWeaponId = weaponId;
-  }
-  availableWeapons.forEach(weapon => {
-    weapon.equipped = (weapon.id === currentEquippedWeaponId);
-  });
-  updateHUDDisplay();
+    if (weaponId === 'weapon2' && !hasPlayerPickedUpVapeWeapon) return;
+    if (currentEquippedWeaponId === weaponId) {
+        currentEquippedWeaponId = '';
+    } else {
+        currentEquippedWeaponId = weaponId;
+    }
+    availableWeapons.forEach(weapon => {
+        weapon.equipped = (weapon.id === currentEquippedWeaponId);
+    });
+
+    switch(currentEquippedWeaponId) {
+        case 'weapon1':
+            logicalMuzzle.position.set(0.2, -0.2, -0.75);
+            break;
+        case 'weapon2':
+            logicalMuzzle.position.set(0.2, -0.1, -0.5);
+            break;
+        case 'weapon3':
+            logicalMuzzle.position.set(0.40, -0.18, -2.0);
+            break;
+        default:
+            logicalMuzzle.position.set(0, 0, -1); 
+            break;
+    }
+
+    updateHUDDisplay();
 }
 
 function regenerateVapeAmmo(deltaTime) {
@@ -1401,6 +1285,120 @@ function regenerateVapeAmmo(deltaTime) {
     }
 }
 
+function createM16WeaponModel() {
+    m16WeaponGroup = new THREE.Group();
+    const mtlLoader = new MTLLoader();
+    const objLoader = new OBJLoader();
+    mtlLoader.load(
+        'https://raw.githubusercontent.com/g94870056/-/main/M16A2_Исправен.mtl',
+        (materials) => {
+            materials.preload();
+            Object.values(materials.materials).forEach(mat => {
+                 if (!mat) return;
+                if (mat.map) {
+                    try {
+                        mat.map.flipY = false;
+                        mat.map.anisotropy = 16;
+                        mat.map.encoding = THREE.sRGBEncoding;
+                        mat.map.wrapS = mat.map.wrapS || THREE.RepeatWrapping;
+                        mat.map.wrapT = mat.map.wrapT || THREE.RepeatWrapping;
+                        mat.map.needsUpdate = true;
+                    } catch (e) {}
+                    if (mat.color) mat.color.setRGB(1, 1, 1);
+                    if ('emissive' in mat) {
+                        mat.emissive = new THREE.Color(0x111111);
+                        if ('emissiveIntensity' in mat) mat.emissiveIntensity = 1.5;
+                    }
+                } else {
+                    if (mat.color && mat.color.r === 0 && mat.color.g === 0 && mat.color.b === 0) mat.color.setRGB(0.05, 0.05, 0.05);
+                    else if (mat.color) {
+                        mat.color.multiplyScalar(0.8);
+                        mat.color.r = Math.min(mat.color.r, 0.6);
+                        mat.color.g = Math.min(mat.color.g, 0.6);
+                        mat.color.b = Math.min(mat.color.b, 0.6);
+                    }
+                    if ('emissive' in mat) {
+                        mat.emissive = new THREE.Color(0x050505);
+                        if ('emissiveIntensity' in mat) mat.emissiveIntensity = 0.15;
+                    }
+                }
+                if ('shininess' in mat && typeof mat.shininess === 'number') mat.shininess = 10;
+                if ('specular' in mat) {
+                    if (!mat.specular) mat.specular = new THREE.Color(0x080808);
+                    mat.specular.lerp(new THREE.Color(0x222222), 0.4);
+                }
+                mat.side = THREE.DoubleSide;
+                if ('needsUpdate' in mat) mat.needsUpdate = true;
+            });
+            objLoader.setMaterials(materials);
+            objLoader.load(
+                'https://raw.githubusercontent.com/Swf45/m16_obj/main/M16A2_Исправлен%5B1%5D.obj',
+                (object) => {
+                    let magazineFound = false;
+                    object.traverse(child => {
+                        if (child.isMesh) {
+                            child.castShadow = false;
+                            child.receiveShadow = false;
+                             if (!child.geometry.attributes.normal) {
+                                child.geometry.computeVertexNormals();
+                            }
+                            const childNameLower = child.name.toLowerCase();
+                            if (!magazineFound && childNameLower.includes('plane005')) {
+                                m16Magazine = child;
+                                magazineFound = true; 
+                            }
+                        }
+                    });
+
+                    if (m16Magazine) {
+                        m16MagazineOriginalPosition.copy(m16Magazine.position);
+                    }
+                    
+                    const box = new THREE.Box3().setFromObject(object);
+                    const size = box.getSize(new THREE.Vector3());
+                    const center = box.getCenter(new THREE.Vector3());
+                    object.position.sub(center);
+                    const weaponContainer = new THREE.Group();
+                    weaponContainer.add(object);
+                    const maxDim = Math.max(size.x, size.y, size.z);
+                    const desiredSize = 1.85;
+                    const scale = desiredSize / maxDim;
+                    weaponContainer.scale.set(scale, scale, scale);
+                    weaponContainer.position.set(0.4, -0.3, -1.0);
+                    weaponContainer.rotation.y = Math.PI / 2;
+                    m16WeaponGroup.add(weaponContainer);
+                    m16WeaponGroup.visible = false;
+                    
+                    if (weaponScene) {
+                        weaponScene.add(m16WeaponGroup);
+                    }
+                },
+                xhr => {},
+                error => console.error('Ошибка загрузки OBJ модели M16:', error)
+            );
+        },
+        xhr => {},
+        error => console.error('Ошибка загрузки MTL файла M16:', error)
+    );
+    
+    const muzzleFlashGeometry = new THREE.ConeGeometry(0.05, 0.2, 4);
+    const muzzleFlashMaterial = new THREE.MeshBasicMaterial({
+        color: 0xffaa00,
+        transparent: true,
+        opacity: 0,
+        depthWrite: false,
+    });
+    m16MuzzleFlash = new THREE.Mesh(muzzleFlashGeometry, muzzleFlashMaterial);
+    m16MuzzleFlash.position.set(0.40, -0.18, -2.0);
+    m16MuzzleFlash.rotation.x = Math.PI / 2;
+    m16MuzzleFlash.visible = false;
+    
+    if (weaponScene) {
+        weaponScene.add(m16MuzzleFlash);
+    }
+}
+
+
 function createVapeWeaponModel() {
     vapeWeaponGroup = new THREE.Group();
     const vapeBodyGeometry = new THREE.CylinderGeometry(0.1, 0.1, 0.4, 32);
@@ -1408,7 +1406,6 @@ function createVapeWeaponModel() {
     const vapeBody = new THREE.Mesh(vapeBodyGeometry, vapeBodyMaterial);
     vapeBody.position.set(0, 0, 0);
     vapeWeaponGroup.add(vapeBody);
-
     const mouthPieceGeometry = new THREE.CylinderGeometry(0.05, 0.05, 0.1, 32);
     const mouthPieceMaterial = new THREE.MeshBasicMaterial({ color: 0x333333 });
     const mouthPiece = new THREE.Mesh(mouthPieceGeometry, mouthPieceMaterial);
@@ -1417,7 +1414,10 @@ function createVapeWeaponModel() {
 
     vapeWeaponGroup.position.set(0.2, -0.2, -0.5);
     vapeWeaponGroup.visible = false;
-    gameCamera.add(vapeWeaponGroup);
+
+    if(weaponScene) {
+        weaponScene.add(vapeWeaponGroup);
+    }
 }
 
 function updateHUDDisplay() {
@@ -1425,7 +1425,6 @@ function updateHUDDisplay() {
     const killsElement = document.getElementById('kills');
     const mobileTimeElement = document.getElementById('mobile-time');
     const mobileKillsElement = document.getElementById('mobile-kills');
-    
     let elapsedTime;
     if (isGameCurrentlyActive) {
         const currentTime = new Date().getTime();
@@ -1437,72 +1436,71 @@ function updateHUDDisplay() {
     const seconds = elapsedTime % 60;
     const timeText = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
     
-    availableWeapons.forEach(weapon => {
-        weapon.equipped = (weapon.id === currentEquippedWeaponId);
-    });
-
-    if (currentEquippedWeaponId === 'weapon1') {
-        if (gunWeaponGroup) gunWeaponGroup.visible = true;
-        if (vapeWeaponGroup) vapeWeaponGroup.visible = false;
-    } else if (currentEquippedWeaponId === 'weapon2') {
-        if (gunWeaponGroup) gunWeaponGroup.visible = false;
-        if (vapeWeaponGroup) vapeWeaponGroup.visible = true;
-    } else { 
-        if (gunWeaponGroup) gunWeaponGroup.visible = false;
-        if (vapeWeaponGroup) vapeWeaponGroup.visible = false;
-    }
+    if (gunWeaponGroup) gunWeaponGroup.visible = currentEquippedWeaponId === 'weapon1';
+    if (vapeWeaponGroup) vapeWeaponGroup.visible = currentEquippedWeaponId === 'weapon2';
+    if (m16WeaponGroup) m16WeaponGroup.visible = currentEquippedWeaponId === 'weapon3';
+    
+    if (m16MuzzleFlash) m16MuzzleFlash.visible = m16MuzzleFlash.material.opacity > 0;
+    if (gunMuzzleFlash) gunMuzzleFlash.visible = gunMuzzleFlash.material.opacity > 0;
 
     if (isMobileControlsEnabled) {
         const mobileAmmoElement = document.querySelector('#mobile-ammo span');
         mobileTimeElement.textContent = timeText;
         mobileKillsElement.textContent = killCount;
-
         if (currentEquippedWeaponId === 'weapon1') {
-            mobileAmmoElement.textContent = isGunReloading ? 'Перезарядка.' : `${displayedGunAmmo}/∞`;
+            mobileAmmoElement.textContent = isGunReloading ? 'Перезарядка...' : `${displayedGunAmmo}/∞`;
         } else if (currentEquippedWeaponId === 'weapon2') {
             mobileAmmoElement.textContent = `${Math.floor(currentVapeWeaponAmmo)}/${vapeWeaponAmmo}`;
+        } else if (currentEquippedWeaponId === 'weapon3') {
+            mobileAmmoElement.textContent = isM16Reloading ? 'Перезарядка...' : `${displayedM16Ammo}/∞`;
         } else {
             mobileAmmoElement.textContent = '-';
         }
-        
         availableWeapons.forEach(({ id, equipped }) => {
             const mobileButton = document.getElementById(`${id}-button`);
             if (!mobileButton) return;
-            
             if (id === 'weapon2') {
                 mobileButton.style.display = hasPlayerPickedUpVapeWeapon ? 'flex' : 'none';
             }
-
-            if (equipped) {
-                if (id === 'weapon1') mobileButton.style.backgroundColor = 'rgba(0, 0, 255, 0.4)';
-                else if (id === 'weapon2') mobileButton.style.backgroundColor = 'rgba(255, 0, 255, 0.4)';
+			if (id === 'weapon3') {
+				mobileButton.style.display = 'flex'; 
+			}
+            const isEquipped = currentEquippedWeaponId === id;
+            if (isEquipped) {
+                if (id === 'weapon1') mobileButton.style.backgroundColor = 'rgba(0, 0, 255, 0.8)';
+                else if (id === 'weapon2') mobileButton.style.backgroundColor = 'rgba(255, 0, 255, 0.8)';
+				else if (id === 'weapon3') mobileButton.style.backgroundColor = 'rgba(0, 255, 255, 0.8)';
             } else {
-                mobileButton.style.backgroundColor = 'rgba(255, 0, 0, 0.4)';
+				if (id === 'weapon1') mobileButton.style.backgroundColor = 'rgba(0, 0, 255, 0.4)';
+                else if (id === 'weapon2') mobileButton.style.backgroundColor = 'rgba(255, 0, 255, 0.4)';
+				else if (id === 'weapon3') mobileButton.style.backgroundColor = 'rgba(0, 255, 255, 0.4)';
             }
         });
     } else {
         const ammoElement = document.getElementById('ammo');
         timeElement.textContent = timeText;
         killsElement.textContent = killCount;
-        
         if (currentEquippedWeaponId === 'weapon1') {
-            ammoElement.textContent = isGunReloading ? 'Перезарядка.' : `${displayedGunAmmo}/∞`;
+            ammoElement.textContent = isGunReloading ? 'Перезарядка...' : `${displayedGunAmmo}/∞`;
         } else if (currentEquippedWeaponId === 'weapon2') {
             ammoElement.textContent = `${Math.floor(currentVapeWeaponAmmo)}/${vapeWeaponAmmo}`;
+        } else if (currentEquippedWeaponId === 'weapon3') {
+            ammoElement.textContent = isM16Reloading ? 'Перезарядка...' : `${displayedM16Ammo}/∞`;
         } else {
             ammoElement.textContent = '-';
         }
-        
-        availableWeapons.forEach(({ id, equipped }) => {
+        availableWeapons.forEach(({ id }) => {
             const pcSlot = document.getElementById(id);
             if (!pcSlot) return;
-
             if (id === 'weapon2') {
                 pcSlot.style.display = hasPlayerPickedUpVapeWeapon ? 'flex' : 'none';
             }
-            
+			if (id === 'weapon3') {
+				pcSlot.style.display = 'flex'; 
+			}
             const check = pcSlot.querySelector('.checkmark');
-            if (equipped) {
+            const isEquipped = currentEquippedWeaponId === id;
+            if (isEquipped) {
                 pcSlot.classList.add('equipped');
                 pcSlot.style.backgroundColor = '';
                 if (!check) {
@@ -1524,35 +1522,6 @@ function updateHUDDisplay() {
     }
 }
 
-
-function createVapeBullet() {
-    for (let i = 0; i < 3; i++) {
-        const bulletGeometry = new THREE.SphereGeometry(0.05, 8, 8);
-        const bulletMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.8 });
-        const bullet = new THREE.Mesh(bulletGeometry, bulletMaterial);
-        bullet.userData.isVapeBullet = true;
-        bullet.userData.damage = 1;
-
-        const cameraWorldPosition = new THREE.Vector3();
-        gameCamera.getWorldPosition(cameraWorldPosition);
-        const cameraWorldDirection = new THREE.Vector3();
-        gameCamera.getWorldDirection(cameraWorldDirection);
-
-        const spreadAngle = (i - 1) * 0.1;
-        const bulletDirection = cameraWorldDirection.clone().applyAxisAngle(new THREE.Vector3(0, 1, 0), spreadAngle);
-
-        const bulletStartPositionOffset = bulletDirection.clone().multiplyScalar(1);
-        bullet.position.copy(cameraWorldPosition).add(bulletStartPositionOffset);
-        bullet.userData.direction = bulletDirection.clone();
-        bullet.userData.speed = 10.0;
-
-        gameScene.add(bullet);
-        playerGameBullets.push(bullet);
-    }
-    currentVapeWeaponAmmo -= 3;
-    updateHUDDisplay();
-}
-
 function createGunWeaponModel() {
     gunWeaponGroup = new THREE.Group();
     const gunGeometry = new THREE.BoxGeometry(0.1, 0.1, 0.5);
@@ -1571,15 +1540,18 @@ function createGunWeaponModel() {
     gunWeaponMagazine.position.set(0, -0.25, -0.2);
     gunWeaponGroup.add(gunWeaponMagazine);
     const muzzleFlashGeometry = new THREE.ConeGeometry(0.1, 0.2, 4);
-    const muzzleFlashMaterial = new THREE.MeshBasicMaterial({
-        color: 0xffaa00,
-        transparent: true,
-    });
+    const muzzleFlashMaterial = new THREE.MeshBasicMaterial({ color: 0xffaa00, transparent: true, opacity: 0, depthWrite: false });
     gunMuzzleFlash = new THREE.Mesh(muzzleFlashGeometry, muzzleFlashMaterial);
     gunMuzzleFlash.position.set(0, 0, -0.25);
     gunMuzzleFlash.rotation.x = Math.PI / 2;
     gunMuzzleFlash.visible = false;
     gunWeaponBody.add(gunMuzzleFlash);
+
+    gunWeaponGroup.position.set(0.2, -0.2, -0.5);
+
+    if(weaponScene) {
+       weaponScene.add(gunWeaponGroup);
+    }
 }
 
 function createBossWeaponModel() {
@@ -1611,19 +1583,16 @@ function createHudSkinPreview(skinKey) {
     const skin = hudSkins[skinKey];
     const previewContainer = document.createElement('div');
     previewContainer.className = 'hud-skin-preview';
-
     const healthBarPreview = document.createElement('div');
     healthBarPreview.className = 'preview-health-bar';
     healthBarPreview.style.background = skin.colors.healthBg;
     healthBarPreview.style.borderColor = skin.colors.healthBorder;
     healthBarPreview.style.borderWidth = '2px';
     healthBarPreview.style.borderStyle = 'solid';
-
     const healthPreview = document.createElement('div');
     healthPreview.className = 'preview-health';
     healthPreview.style.background = skin.colors.health;
     healthPreview.style.width = '70%';
-
     const hudPreview = document.createElement('div');
     hudPreview.className = 'preview-hud';
     hudPreview.style.background = skin.colors.background;
@@ -1632,22 +1601,18 @@ function createHudSkinPreview(skinKey) {
     hudPreview.style.borderStyle = 'solid';
     hudPreview.style.color = skin.colors.text;
     hudPreview.textContent = 'HUD';
-
     healthBarPreview.appendChild(healthPreview);
     previewContainer.appendChild(hudPreview);
     previewContainer.appendChild(healthBarPreview);
-
     return previewContainer;
 }
 
 function updateSkinsMenuDisplay() {
     const skinsList = document.getElementById('skins-list');
     skinsList.innerHTML = '';
-
     let weaponSectionTitle = document.createElement('h3');
     weaponSectionTitle.textContent = 'Скины оружия';
     skinsList.appendChild(weaponSectionTitle);
-
     for (let key in weaponSkins) {
         let skin = weaponSkins[key];
         let skinDiv = document.createElement('div');
@@ -1661,9 +1626,8 @@ function updateSkinsMenuDisplay() {
             currentWeaponSkin = key;
             skinsModalElement.style.display = 'none';
             updateGunSkin();
-            updateSkinsMenuDisplay(); 
+            updateSkinsMenuDisplay();
         });
-
         if (key === currentWeaponSkin) {
             skinDiv.classList.add('selected-skin');
             selectButton.textContent = 'Выбрано';
@@ -1672,8 +1636,6 @@ function updateSkinsMenuDisplay() {
             selectButton.textContent = 'Выбрать';
             selectButton.classList.remove('selected-button');
         }
-
-
         if (!skin.unlocked) {
             let lockSpan = document.createElement('span');
             lockSpan.textContent = '🔒 Требуется 1000 киллов';
@@ -1683,51 +1645,39 @@ function updateSkinsMenuDisplay() {
         skinDiv.appendChild(selectButton);
         skinsList.appendChild(skinDiv);
     }
-
     let separator = document.createElement('hr');
     skinsList.appendChild(separator);
-
     let hudSectionTitle = document.createElement('h3');
     hudSectionTitle.textContent = 'Скины HUD';
     skinsList.appendChild(hudSectionTitle);
-
     for (let key in hudSkins) {
         let skin = hudSkins[key];
         let skinDiv = document.createElement('div');
         skinDiv.className = 'skin-item';
-
         let skinInfo = document.createElement('div');
         skinInfo.className = 'skin-info';
-
         let skinName = document.createElement('span');
         skinName.textContent = skin.name;
         skinInfo.appendChild(skinName);
-
         let preview = createHudSkinPreview(key);
         skinInfo.appendChild(preview);
-
         skinDiv.appendChild(skinInfo);
-
         let buttonContainer = document.createElement('div');
         buttonContainer.style.display = 'flex';
         buttonContainer.style.flexDirection = 'column';
         buttonContainer.style.alignItems = 'center';
-
         if (!skin.unlocked && recordKillCount < skin.requiredKills) {
             let lockSpan = document.createElement('div');
             lockSpan.textContent = `🔒 Требуется ${skin.requiredKills} киллов`;
             lockSpan.className = 'required-kills-text';
             buttonContainer.appendChild(lockSpan);
         }
-
         let selectButton = document.createElement('button');
         selectButton.textContent = key === currentHudSkin ? 'Выбрано' : 'Выбрать';
         selectButton.disabled = !skin.unlocked && recordKillCount < skin.requiredKills;
         selectButton.className = key === currentHudSkin ? 'selected-button' : '';
         buttonContainer.appendChild(selectButton);
-
         skinDiv.appendChild(buttonContainer);
-
         selectButton.addEventListener('click', function () {
             if (recordKillCount >= skin.requiredKills || skin.unlocked) {
                 currentHudSkin = key;
@@ -1735,12 +1685,9 @@ function updateSkinsMenuDisplay() {
                 updateSkinsMenuDisplay();
             }
         });
-
         if (key === currentHudSkin) {
             skinDiv.classList.add('selected-skin');
         }
-
-
         skinsList.appendChild(skinDiv);
     }
 }
@@ -1748,46 +1695,36 @@ function updateSkinsMenuDisplay() {
 function applyHudSkin(skinKey) {
     const skin = hudSkins[skinKey];
     if (!skin) return;
-
     const hudElement = document.getElementById('hud');
     const healthBarElement = document.getElementById('health-bar');
     const healthElement = document.getElementById('health');
     const weaponSlotElements = document.querySelectorAll('.weapon-slot');
-
     hudElement.style.borderColor = skin.colors.border;
     hudElement.style.background = skin.colors.background;
     hudElement.style.color = skin.colors.text;
-
     healthBarElement.style.borderColor = skin.colors.border;
     healthBarElement.style.backgroundColor = skin.colors.healthBg;
     healthElement.style.background = skin.colors.health;
     healthElement.style.color = skin.colors.text;
-
     weaponSlotElements.forEach(slot => {
         slot.style.borderColor = skin.colors.border;
         slot.style.borderImage = 'none';
     });
-
     const mobileHudElement = document.getElementById('mobile-hud');
     const mobileHealthBarElement = document.getElementById('mobile-health-bar');
     const mobileHealthElement = document.getElementById('mobile-health');
     const mobileWeaponSlotElements = document.querySelectorAll('.mobile-weapon-slot');
-
     mobileHudElement.style.borderColor = skin.colors.border;
     mobileHudElement.style.background = skin.colors.background;
     mobileHudElement.style.color = skin.colors.text;
-
     mobileHealthBarElement.style.borderColor = skin.colors.border;
     mobileHealthBarElement.style.backgroundColor = skin.colors.healthBg;
     mobileHealthElement.style.background = skin.colors.health;
     mobileHealthElement.style.color = skin.colors.text;
-
     mobileWeaponSlotElements.forEach(slot => {
         slot.style.borderColor = skin.colors.border;
         slot.style.borderImage = 'none';
     });
-
-
     localStorage.setItem('selectedHudSkin', skinKey);
 }
 
@@ -1815,7 +1752,6 @@ function loadSkinsUnlockStatus() {
 		hudSkins.retro.unlocked = data.retroHUDUnlocked || false;
 		hudSkins.futuristic.unlocked = data.futuristicHUDUnlocked || false;
 		hudSkins.military.unlocked = data.militaryHUDUnlocked || false;
-
 		if (recordKillCount >= hudSkins.neon.requiredKills) hudSkins.neon.unlocked = true;
 		if (recordKillCount >= hudSkins.retro.requiredKills) hudSkins.retro.unlocked = true;
 		if (recordKillCount >= hudSkins.futuristic.requiredKills) hudSkins.futuristic.unlocked = true;
@@ -1823,17 +1759,11 @@ function loadSkinsUnlockStatus() {
     }
 }
 
-loadSkinsUnlockStatus();
-
 function getRandomSpawnPosition() {
     let position;
     let isPositionValid = false;
     while (!isPositionValid) {
-        position = new THREE.Vector3(
-            (Math.random() - 0.5) * gameTileSize,
-            1.6,
-            (Math.random() - 0.5) * gameTileSize
-        );
+        position = new THREE.Vector3((Math.random() - 0.5) * gameTileSize, 1.6, (Math.random() - 0.5) * gameTileSize);
         isPositionValid = true;
         for (let i = 0; i < gameTrees.length; i++) {
             const treePosition = gameTrees[i];
@@ -1848,16 +1778,68 @@ function getRandomSpawnPosition() {
 }
 
 function reloadGun() {
-    const gunWeapon = availableWeapons.find(weapon => weapon.id === 'weapon1');
-    if (!gunWeapon || !gunWeapon.equipped || isGunReloading || currentGunAmmo === gunMagazineSize) {
-        return;
+    if (currentEquippedWeaponId === 'weapon1') {
+        if (isGunReloading || currentGunAmmo === gunMagazineSize) return;
+        isGunReloading = true;
+        isGunAnimatingReload = true;
+        gunReloadAnimationProgress = 0;
+        updateHUDDisplay();
+    } 
+    else if (currentEquippedWeaponId === 'weapon3') {
+        if (isM16Reloading || !m16Magazine || currentM16Ammo === m16MagazineSize) return;
+    
+        isM16Reloading = true;
+        updateHUDDisplay();
+    
+        const startPosition = m16Magazine.position.clone();
+        const startRotation = m16Magazine.rotation.clone();
+    
+        new TWEEN.Tween(m16Magazine.position)
+            .to({
+                x: startPosition.x,
+                y: startPosition.y - 0.3,
+                z: startPosition.z
+            }, 500)
+            .easing(TWEEN.Easing.Cubic.Out)
+            .start();
+        
+        new TWEEN.Tween(m16Magazine.rotation)
+            .to({
+                x: startRotation.x + Math.PI/4,
+                y: startRotation.y,
+                z: startRotation.z
+            }, 500)
+            .easing(TWEEN.Easing.Cubic.Out)
+            .onComplete(() => {
+                setTimeout(() => {
+                    new TWEEN.Tween(m16Magazine.position)
+                        .to({
+                            x: startPosition.x,
+                            y: startPosition.y,
+                            z: startPosition.z
+                        }, 500)
+                        .easing(TWEEN.Easing.Cubic.In)
+                        .start();
+                    
+                    new TWEEN.Tween(m16Magazine.rotation)
+                        .to({
+                            x: startRotation.x,
+                            y: startRotation.y,
+                            z: startRotation.z
+                        }, 500)
+                        .easing(TWEEN.Easing.Cubic.In)
+                        .onComplete(() => {
+                            isM16Reloading = false;
+                            currentM16Ammo = m16MagazineSize;
+                            displayedM16Ammo = currentM16Ammo;
+                            updateHUDDisplay();
+                        })
+                        .start();
+                }, 300);
+            })
+            .start();
     }
-    isGunReloading = true;
-    isGunAnimatingReload = true;
-    gunReloadAnimationProgress = 0;
-    updateHUDDisplay();
 }
-
 function showDeathModal() {
     const deathModalElement = document.getElementById('death-modal');
     deathModalElement.style.display = 'flex';
@@ -1881,14 +1863,10 @@ function updateMenuDisplay() {
     updateSkinsMenuDisplay();
 }
 
-loadGameProgress();
-updateMenuDisplay();
-
 function updateHealthBarDisplay() {
     const healthBar = document.getElementById('health');
     healthBar.style.width = currentPlayerHealth + '%';
     healthBar.textContent = currentPlayerHealth + '%';
-
     const mobileHealthBar = document.getElementById('mobile-health');
     mobileHealthBar.style.width = currentPlayerHealth + '%';
     mobileHealthBar.textContent = currentPlayerHealth + '%';
@@ -1926,49 +1904,31 @@ function createTreeInstance(positions) {
 }
 
 function bossShoot() {
-    const gunWeapon = availableWeapons.find(weapon => weapon.id === 'weapon1');
-    if (!isGameCurrentlyActive || !gameBoss || !gunWeapon.equipped) return;
+    if (!isGameCurrentlyActive || !gameBoss) return;
     const currentTime = performance.now() / 1000;
     if (currentTime - bossLastFireTime >= bossFireInterval) {
         bossLastFireTime = currentTime;
-
         for (let i = 0; i < 3; i++) {
-            const bulletGeometry = new THREE.SphereGeometry(0.05, 8, 8);
-            const bulletMaterial = new THREE.MeshBasicMaterial({
-                color: 0xffffff,
-                transparent: true,
-                opacity: 0.8
-            });
-            const bullet = new THREE.Mesh(bulletGeometry, bulletMaterial);
+            const bullet = new THREE.Mesh(
+                new THREE.SphereGeometry(0.05, 8, 8),
+                new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.8 })
+            );
             bullet.userData.isBossBullet = true;
             const vapeMouthPiecePosition = new THREE.Vector3();
             const mouthPiece = bossWeaponGroup.children[0].children[0];
             mouthPiece.getWorldPosition(vapeMouthPiecePosition);
             bullet.position.copy(vapeMouthPiecePosition);
-
             const playerPosition = new THREE.Vector3();
             playerObject.getWorldPosition(playerPosition);
-
-            const bulletDirection = new THREE.Vector3();
-            bulletDirection.subVectors(playerPosition, vapeMouthPiecePosition).normalize();
-
+            const bulletDirection = new THREE.Vector3().subVectors(playerPosition, vapeMouthPiecePosition).normalize();
             const spreadAngle = (i - 1) * 0.1;
-            const axis = new THREE.Vector3(0, 1, 0);
-            bulletDirection.applyAxisAngle(axis, spreadAngle);
-
-            const bulletSpeed = 20.0;
-            bullet.userData.direction = bulletDirection;
-            bullet.userData.speed = bulletSpeed;
+            bulletDirection.applyAxisAngle(new THREE.Vector3(0, 1, 0), spreadAngle);
+            
+            bullet.userData.velocity = bulletDirection.multiplyScalar(20.0);
             bullet.userData.damage = currentBossDamage;
             gameScene.add(bullet);
             gameBullets.push(bullet);
         }
-
-        gunMuzzleFlash.visible = true;
-        gunMuzzleFlash.material.opacity = 0.5;
-        setTimeout(() => {
-            gunMuzzleFlash.visible = false;
-        }, 200);
     }
 }
 
@@ -1994,8 +1954,8 @@ function createBossHealthBar() {
     healthTextContext.font = 'Bold 40px Arial';
     healthTextContext.fillStyle = 'white';
     healthTextContext.textAlign = 'center';
-    healthTextContext.fillText(baseBossHealth.toString(), healthTextCanvas.width / 2, healthTextCanvas.height / 2 + 14);
-        const healthTextTexture = new THREE.CanvasTexture(healthTextCanvas);
+    healthTextContext.fillText(bossHealth.toString(), healthTextCanvas.width / 2, healthTextCanvas.height / 2 + 14);
+    const healthTextTexture = new THREE.CanvasTexture(healthTextCanvas);
     const healthTextMaterial = new THREE.SpriteMaterial({ map: healthTextTexture, transparent: true });
     const healthTextSprite = new THREE.Sprite(healthTextMaterial);
     healthTextSprite.scale.set(2, 0.5, 1);
@@ -2003,7 +1963,7 @@ function createBossHealthBar() {
     healthTextSprite.name = 'healthText';
     healthBar.add(healthTextSprite);
     healthBar.userData.textCanvas = healthTextCanvas;
-healthBar.userData.textContext = healthTextContext;
+    healthBar.userData.textContext = healthTextContext;
     healthBar.userData.textTexture = healthTextTexture;
     return healthBar;
 }
@@ -2024,7 +1984,7 @@ function updateBossHealthBar() {
         healthTextContext.font = 'Bold 40px Arial';
         healthTextContext.fillStyle = 'white';
         healthTextContext.textAlign = 'center';
-        healthTextContext.fillText(bossHealth.toString(), healthTextCanvas.width / 2, healthTextCanvas.height / 2 + 14);
+        healthTextContext.fillText(Math.ceil(bossHealth).toString(), healthTextCanvas.width / 2, healthTextCanvas.height / 2 + 14);
         healthTextTexture.needsUpdate = true;
     }
 }
@@ -2034,43 +1994,29 @@ function createBossEnemy() {
         gameScene.remove(gameEnemies[i]);
     }
     gameEnemies.length = 0;
-
     let spawnPosition;
     if (gameEnemies.length > 0) {
         const randomEnemy = gameEnemies[Math.floor(Math.random() * gameEnemies.length)];
         const enemyPosition = randomEnemy.position.clone();
-        const offset = new THREE.Vector3(
-            (Math.random() - 0.5) * 10,
-            0,
-            (Math.random() - 0.5) * 10
-        );
+        const offset = new THREE.Vector3((Math.random() - 0.5) * 10, 0, (Math.random() - 0.5) * 10);
         spawnPosition = enemyPosition.add(offset);
     } else {
-        const offset = new THREE.Vector3(
-            (Math.random() - 0.5) * 10,
-            0,
-            (Math.random() - 0.5) * 10
-        );
+        const offset = new THREE.Vector3((Math.random() - 0.5) * 10, 0, (Math.random() - 0.5) * 10);
         spawnPosition = playerObject.position.clone().add(offset);
     }
-
     const bossTexture = new THREE.TextureLoader().load('https://i.postimg.cc/281t56C0/g-MVlsj-Khacjf82o-Zy764m-QTQ2a-Km2q5yp6h-VYXek.jpg');
-    const bossMaterial = new THREE.MeshBasicMaterial({
-        map: bossTexture,
-        transparent: true,
-        side: THREE.DoubleSide
-    });
+    const bossMaterial = new THREE.MeshBasicMaterial({ map: bossTexture, transparent: true, side: THREE.DoubleSide });
     const bossGeometry = new THREE.PlaneGeometry(3, 3);
     const bossMesh = new THREE.Mesh(bossGeometry, bossMaterial);
-    bossMesh.userData.isBossMesh = true;
     gameBoss = new THREE.Object3D();
     gameBoss.add(bossMesh);
     gameBoss.position.copy(spawnPosition);
     bossHealth = baseBossHealth;
-
+    gameBoss.userData.health = bossHealth; 
+    gameBoss.userData.isBossMesh = true;
     const bossHealthBar = createBossHealthBar();
-    bossHealthBar.position.set(gameBoss.position.x, gameBoss.position.y + 3.5, gameBoss.position.z);
-    gameScene.add(bossHealthBar);
+    bossHealthBar.position.set(0, 3.5, 0);
+    gameBoss.add(bossHealthBar);
     gameBoss.userData.healthBar = bossHealthBar;
     gameScene.add(gameBoss);
     createBossWeaponModel();
@@ -2078,30 +2024,20 @@ function createBossEnemy() {
 
 function dropBossWeapon(position) {
     const droppedWeapon = new THREE.Group();
-
     const vapeGeometry = new THREE.CylinderGeometry(0.1, 0.1, 0.4, 32);
     const vapeMaterial = new THREE.MeshBasicMaterial({ color: 0x0000ff });
     const vapeMesh = new THREE.Mesh(vapeGeometry, vapeMaterial);
     vapeMesh.rotation.x = Math.PI / 2;
     droppedWeapon.add(vapeMesh);
-
     const ringGeometry = new THREE.RingGeometry(0.5, 0.7, 32);
-    const ringMaterial = new THREE.MeshBasicMaterial({
-        color: 0xff0000,
-        side: THREE.DoubleSide,
-        transparent: true,
-        opacity: 0.6
-    });
+    const ringMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000, side: THREE.DoubleSide, transparent: true, opacity: 0.6 });
     const ringMesh = new THREE.Mesh(ringGeometry, ringMaterial);
     ringMesh.rotation.x = -Math.PI / 2;
     ringMesh.position.y = -0.2;
     droppedWeapon.add(ringMesh);
-
     droppedWeapon.position.copy(position);
     droppedWeapon.userData.isDroppedWeapon = true;
-
     gameScene.add(droppedWeapon);
-
     return droppedWeapon;
 }
 
@@ -2130,18 +2066,15 @@ function createEnemyHealthBar() {
     const barWidth = 1;
     const barHeight = 0.1;
     const healthBar = new THREE.Group();
-
     const backgroundGeometry = new THREE.PlaneGeometry(barWidth, barHeight);
-        const backgroundMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+    const backgroundMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
     const background = new THREE.Mesh(backgroundGeometry, backgroundMaterial);
     healthBar.add(background);
-
     const foregroundGeometry = new THREE.PlaneGeometry(barWidth, barHeight);
     const foregroundMaterial = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
     const foreground = new THREE.Mesh(foregroundGeometry, foregroundMaterial);
     foreground.position.z = 0.01;
     healthBar.add(foreground);
-
     const healthTextCanvas = document.createElement('canvas');
     healthTextCanvas.width = 128;
     healthTextCanvas.height = 32;
@@ -2150,38 +2083,34 @@ function createEnemyHealthBar() {
     healthTextContext.fillStyle = 'white';
     healthTextContext.textAlign = 'center';
     healthTextContext.fillText(baseEnemyHealth.toString(), healthTextCanvas.width / 2, healthTextCanvas.height / 2 + 7);
-        const healthTextTexture = new THREE.CanvasTexture(healthTextCanvas);
+    const healthTextTexture = new THREE.CanvasTexture(healthTextCanvas);
     const healthTextMaterial = new THREE.SpriteMaterial({ map: healthTextTexture, transparent: true });
     const healthTextSprite = new THREE.Sprite(healthTextMaterial);
     healthTextSprite.scale.set(1, 0.25, 1);
     healthTextSprite.position.set(0, 0.2, 0);
     healthBar.add(healthTextSprite);
-
     healthBar.userData.foreground = foreground;
     healthBar.userData.barWidth = barWidth;
     healthBar.userData.healthTextCanvas = healthTextCanvas;
     healthBar.userData.healthTextContext = healthTextContext;
     healthBar.userData.healthTextTexture = healthTextTexture;
-
     return healthBar;
 }
 
 function updateHealthBarForEnemy(enemy) {
     const healthPercent = enemy.userData.health / enemy.userData.maxHealth;
     const healthBar = enemy.userData.healthBar;
-
     if (healthBar) {
         const foreground = healthBar.userData.foreground;
         foreground.scale.x = healthPercent;
         foreground.position.x = -(1 - healthPercent) * healthBar.userData.barWidth / 2;
-
         const healthTextContext = healthBar.userData.healthTextContext;
         const healthTextCanvas = healthBar.userData.healthTextCanvas;
         healthTextContext.clearRect(0, 0, healthTextCanvas.width, healthTextCanvas.height);
         healthTextContext.font = 'Bold 20px Arial';
         healthTextContext.fillStyle = 'white';
         healthTextContext.textAlign = 'center';
-        healthTextContext.fillText(enemy.userData.health.toString(), healthTextCanvas.width / 2, healthTextCanvas.height / 2 + 7);
+        healthTextContext.fillText(Math.ceil(enemy.userData.health).toString(), healthTextCanvas.width / 2, healthTextCanvas.height / 2 + 7);
         healthBar.userData.healthTextTexture.needsUpdate = true;
     }
 }
@@ -2189,113 +2118,97 @@ function updateHealthBarForEnemy(enemy) {
 function createEnemyInTile(tileX, tileZ, ignoreMaxEnemies = false) {
     if (!isGameCurrentlyActive) return;
     if (gameBoss) return;
-    if (!ignoreMaxEnemies && gameEnemies.length >= maxActiveEnemies) {
-        return;
-    }
-
+    if (!ignoreMaxEnemies && gameEnemies.length >= maxActiveEnemies) return;
     const enemy = new THREE.Object3D();
-const enemyTexture = new THREE.TextureLoader().load(
-               'https://i.postimg.cc/QC6j7xGC/photo-2024-05-28-17-49-00.jpg'
-    );
-    const enemyMaterial = new THREE.MeshBasicMaterial({
-        map: enemyTexture,
-        transparent: true,
-        side: THREE.DoubleSide
-    });
-       const enemyGeometry = new THREE.PlaneGeometry(2, 2);
-const enemyMesh = new THREE.Mesh(enemyGeometry, enemyMaterial);
-    enemyMesh.userData.isEnemyMesh = true;
+    const enemyTexture = new THREE.TextureLoader().load('https://i.postimg.cc/QC6j7xGC/photo-2024-05-28-17-49-00.jpg');
+    const enemyMaterial = new THREE.MeshBasicMaterial({ map: enemyTexture, transparent: true, side: THREE.DoubleSide });
+    const enemyGeometry = new THREE.PlaneGeometry(2, 2);
+    const enemyMesh = new THREE.Mesh(enemyGeometry, enemyMaterial);
     enemy.add(enemyMesh);
-
     const sword = createSwordWeaponModel();
     sword.position.set(-0.5, -0.5, 0.4);
     sword.rotation.set(0, Math.PI / 2, 0);
     enemy.add(sword);
-
     const minX = tileX * gameTileSize;
     const maxX = minX + gameTileSize;
     const minZ = tileZ * gameTileSize;
     const maxZ = minZ + gameTileSize;
-enemy.position.x = Math.random() * (maxX - minX) + minX;
+    enemy.position.x = Math.random() * (maxX - minX) + minX;
     enemy.position.z = Math.random() * (maxZ - minZ) + minZ;
     enemy.position.y = 1;
-
     enemy.userData.health = baseEnemyHealth;
     enemy.userData.maxHealth = baseEnemyHealth;
     enemy.userData.damage = currentEnemyDamage;
-
     const healthBar = createEnemyHealthBar();
     healthBar.position.set(0, 2.5, 0);
     enemy.add(healthBar);
     enemy.userData.healthBar = healthBar;
-
     gameScene.add(enemy);
     gameEnemies.push(enemy);
 }
 
+
 function createVapeSmokeEffect() {
     const bulletCount = 3;
     const angleStep = 0.05;
+    if (currentVapeWeaponAmmo < bulletCount) return;
 
-    if (currentVapeWeaponAmmo < bulletCount) {
-        return;
+    const raycaster = new THREE.Raycaster();
+    raycaster.setFromCamera(new THREE.Vector2(0, 0), gameCamera);
+    const objectsToIntersect = [...gameEnemies, gameBoss, ...Object.values(gameTileMeshes)].filter(Boolean);
+    const intersects = raycaster.intersectObjects(objectsToIntersect, true);
+
+    let targetPoint;
+    if (intersects.length > 0) {
+        targetPoint = intersects[0].point;
+    } else {
+        targetPoint = new THREE.Vector3();
+        gameCamera.getWorldDirection(targetPoint).multiplyScalar(1000).add(gameCamera.position);
     }
+    
+    const muzzleWorldPos = new THREE.Vector3();
+    logicalMuzzle.getWorldPosition(muzzleWorldPos);
+    
+    const centerDirection = new THREE.Vector3().subVectors(targetPoint, muzzleWorldPos).normalize();
+    
+    const playerWorldVelocity = new THREE.Vector3(playerVelocity.x, 0, playerVelocity.z).applyQuaternion(playerObject.quaternion);
 
     for (let i = 0; i < bulletCount; i++) {
-        const bulletGeometry = new THREE.SphereGeometry(0.05, 8, 8);
-        const bulletMaterial = new THREE.MeshBasicMaterial({
-            color: 0xffffff,
-            transparent: true,
-            opacity: 0.2
-        });
-        const bullet = new THREE.Mesh(bulletGeometry, bulletMaterial);
+        const bullet = new THREE.Mesh(
+            new THREE.SphereGeometry(0.05, 8, 8),
+            new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.2 })
+        );
         bullet.userData.isVapeBullet = true;
         bullet.userData.damage = 2;
-
-        const cameraWorldPosition = new THREE.Vector3();
-        gameCamera.getWorldPosition(cameraWorldPosition);
-        const cameraWorldDirection = new THREE.Vector3();
-        gameCamera.getWorldDirection(cameraWorldDirection);
-
+        
         const spreadAngle = (i - Math.floor(bulletCount / 2)) * angleStep;
-        const axis = new THREE.Vector3(0, 1, 0);
-        cameraWorldDirection.applyAxisAngle(axis, spreadAngle);
+        const bulletDirection = centerDirection.clone().applyAxisAngle(new THREE.Vector3(0, 1, 0), spreadAngle);
+        
+        const bulletBaseVelocity = bulletDirection.multiplyScalar(currentBulletSpeed);
+        
+        const finalVelocity = bulletBaseVelocity.add(playerWorldVelocity);
 
-        const bulletStartPositionOffset = cameraWorldDirection.clone().multiplyScalar(1);
-        bullet.position.copy(cameraWorldPosition).add(bulletStartPositionOffset);
-        bullet.userData.direction = cameraWorldDirection.clone();
-        bullet.userData.speed = currentBulletSpeed;
-
+        bullet.position.copy(muzzleWorldPos);
+        bullet.userData.velocity = finalVelocity;
+        
         gameScene.add(bullet);
         playerGameBullets.push(bullet);
-
-        cameraWorldDirection.applyAxisAngle(axis, -spreadAngle);
     }
-
     currentVapeWeaponAmmo -= bulletCount;
     updateHUDDisplay();
-    gunMuzzleFlash.visible = true;
-    gunMuzzleFlash.material.opacity = 1;
-    const currentTimeSec = performance.now() / 1000;
-    muzzleFlashEndTimeEpoch = currentTimeSec + 0.05;
 }
 
+
 function shootWeapon() {
-     const currentWeapon = availableWeapons.find(weapon => weapon.id === currentEquippedWeaponId);
-
+    const currentWeapon = availableWeapons.find(weapon => weapon.id === currentEquippedWeaponId);
     if (!currentWeapon || !currentWeapon.equipped) return;
-
+    
     if (currentEquippedWeaponId === 'weapon1') {
-        if (currentGunAmmo <= 0) {
-            return;
-        }
-
-        if (isGunReloading) return;
-
+        if (currentGunAmmo <= 0 || isGunReloading) return;
         const currentTime = performance.now() / 1000;
         if (currentTime - lastGunShotTime >= gunShotInterval) {
             lastGunShotTime = currentTime;
-            createPlayerBullet();
+            handleHitscanFire(2);
             currentGunAmmo = Math.max(currentGunAmmo - 1, 0);
             displayedGunAmmo = currentGunAmmo;
             updateHUDDisplay();
@@ -2303,155 +2216,194 @@ function shootWeapon() {
     } else if (currentEquippedWeaponId === 'weapon2') {
         if (currentVapeWeaponAmmo >= 3) {
             createVapeSmokeEffect();
-        } else {
         }
+    } else if (currentEquippedWeaponId === 'weapon3') {
+		if (currentM16Ammo <= 0 || isM16Reloading) return;
+		const currentTime = performance.now() / 1000;
+        if (currentTime - lastM16ShotTime >= m16ShotInterval) {
+            lastM16ShotTime = currentTime;
+            handleHitscanFire(2.30);
+            currentM16Ammo--;
+            displayedM16Ammo = currentM16Ammo;
+			if (m16MuzzleFlash) {
+				m16MuzzleFlash.material.opacity = 1.0;
+				m16MuzzleFlashEndTimeEpoch = currentTime + 0.05;
+			}
+            updateHUDDisplay();
+        }
+	}
+}
+
+function handleHitscanFire(damage) {
+    const raycaster = new THREE.Raycaster();
+    raycaster.setFromCamera(new THREE.Vector2(0, 0), gameCamera);
+    
+    const objectsToIntersect = [...gameEnemies, gameBoss].filter(Boolean);
+    const intersects = raycaster.intersectObjects(objectsToIntersect, true);
+
+    let hitPoint = null;
+
+    if (intersects.length > 0) {
+        let hitObject = intersects[0].object;
+        hitPoint = intersects[0].point;
+        let target = null;
+        while (hitObject) {
+            if (hitObject.userData && hitObject.userData.health !== undefined) {
+                target = hitObject;
+                break;
+            }
+            hitObject = hitObject.parent;
+        }
+
+        if (target) {
+            if (target.userData.isBossMesh) {
+                 bossHealth -= damage;
+                 if (bossHealth < 0) bossHealth = 0;
+                 updateBossHealthBar();
+                 if (bossHealth <= 0) {
+                     killCount++;
+                     updateHUDDisplay();
+                     if (!hasPlayerPickedUpVapeWeapon) bossDroppedVapeWeapon = dropBossWeapon(gameBoss.position);
+                     endBossFight();
+                     generateEnemies();
+                 }
+            } else {
+                target.userData.health -= damage;
+                updateHealthBarForEnemy(target);
+                if (target.userData.health <= 0) {
+                    const index = gameEnemies.indexOf(target);
+                    if (index > -1) gameEnemies.splice(index, 1);
+                    gameScene.remove(target);
+                    killCount++;
+                    updateHUDDisplay();
+                }
+            }
+        }
+    }
+
+    createBulletTracer(hitPoint);
+    
+    if (damage === 2) {
+        gunMuzzleFlash.material.opacity = 1;
+        muzzleFlashEndTimeEpoch = (performance.now() / 1000) + 0.05;
     }
 }
 
-function createPlayerBullet() {
-    const bulletGeometry = new THREE.SphereGeometry(0.1, 8, 8);
-    const bulletMaterial = new THREE.MeshBasicMaterial({ color: 0xffff00, transparent: true, opacity: 0.8 });
-    const bullet = new THREE.Mesh(bulletGeometry, bulletMaterial);
-    bullet.userData.isPlayerBullet = true;
-    bullet.userData.damage = 2;
-    const cameraWorldPosition = new THREE.Vector3();
-    gameCamera.getWorldPosition(cameraWorldPosition);
-    const cameraWorldDirection = new THREE.Vector3();
-    gameCamera.getWorldDirection(cameraWorldDirection);
-    const bulletStartPositionOffset = cameraWorldDirection.clone().multiplyScalar(1);
-    bullet.position.copy(cameraWorldPosition).add(bulletStartPositionOffset);
-    bullet.userData.direction = cameraWorldDirection.clone();
-    bullet.userData.speed = currentBulletSpeed;
-    gameScene.add(bullet);
-    playerGameBullets.push(bullet);
-    gunMuzzleFlash.visible = true;
-    gunMuzzleFlash.material.opacity = 1;
-    const currentTimeSec = performance.now() / 1000;
-    muzzleFlashEndTimeEpoch = currentTimeSec + 0.05;
+function createBulletTracer(hitPoint) {
+    const tracer = new THREE.Mesh(
+        new THREE.SphereGeometry(0.1, 8, 8),
+        new THREE.MeshBasicMaterial({ color: 0xffff00, transparent: true, opacity: 0.8 })
+    );
+    tracer.userData.isTracer = true; 
+    tracer.userData.life = 1.0;
+
+    let targetPoint;
+    if (hitPoint) {
+        targetPoint = hitPoint;
+    } else {
+        const cameraWorldPosition = new THREE.Vector3();
+        gameCamera.getWorldPosition(cameraWorldPosition);
+        targetPoint = new THREE.Vector3();
+        gameCamera.getWorldDirection(targetPoint).multiplyScalar(1000).add(cameraWorldPosition);
+    }
+    
+    const muzzleWorldPos = new THREE.Vector3();
+    logicalMuzzle.getWorldPosition(muzzleWorldPos);
+    
+    tracer.position.copy(muzzleWorldPos);
+    
+    const direction = new THREE.Vector3().subVectors(targetPoint, muzzleWorldPos).normalize();
+    const tracerBaseVelocity = direction.multiplyScalar(currentBulletSpeed * 2);
+
+    const playerWorldVelocity = new THREE.Vector3(playerVelocity.x, 0, playerVelocity.z).applyQuaternion(playerObject.quaternion);
+    const finalVelocity = tracerBaseVelocity.add(playerWorldVelocity);
+    
+    tracer.userData.velocity = finalVelocity; 
+    
+    gameScene.add(tracer);
+    playerGameBullets.push(tracer);
 }
+
 
 function initScene() {
     gameScene = new THREE.Scene();
     gameScene.background = new THREE.Color(0x87CEEB);
     gameScene.fog = new THREE.FogExp2(0x87CEEB, 0.002);
-    gameCamera = new THREE.PerspectiveCamera(
-        75,
-        window.innerWidth / window.innerHeight,
-        0.1,
-        1000
-    );
-   gameRenderer = new THREE.WebGLRenderer({ antialias: false });
- gameRenderer.setSize(window.innerWidth, window.innerHeight);
+
+    weaponScene = new THREE.Scene();
+
+    gameCamera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    weaponCamera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+    directionalLight.position.set(50, 50, 50);
+    directionalLight.castShadow = true;
+    directionalLight.shadow.mapSize.width = 1024;
+    directionalLight.shadow.mapSize.height = 1024;
+    
+    gameScene.add(ambientLight);
+    gameScene.add(directionalLight);
+    weaponScene.add(ambientLight.clone());
+    weaponScene.add(directionalLight.clone());
+    
+    gameRenderer = new THREE.WebGLRenderer({ antialias: true });
+    gameRenderer.setSize(window.innerWidth, window.innerHeight);
+    gameRenderer.setPixelRatio(window.devicePixelRatio);
+    gameRenderer.shadowMap.enabled = true;
+    gameRenderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    gameRenderer.autoClear = false;
     document.body.appendChild(gameRenderer.domElement);
+
     playerObject = new THREE.Object3D();
     playerObject.position.set(0, 1.6, 0);
     gameScene.add(playerObject);
     playerObject.add(gameCamera);
-    generateTilesAroundPlayer();
+
+    logicalMuzzle = new THREE.Object3D();
+    gameCamera.add(logicalMuzzle);
+
     createGunWeaponModel();
     createVapeWeaponModel();
+	createM16WeaponModel(); 
+
+    generateTilesAroundPlayer();
     updateGunSkin();
-    gunWeaponGroup.position.set(0.2, -0.2, -0.5);
-    gameCamera.add(gunWeaponGroup);
     updateHUDDisplay();
     applyHudSkin(currentHudSkin);
-
 }
-
-document.addEventListener('mousedown', function(event) {
-    if (isGameCurrentlyActive && isPointerLocked && event.button === 0) {
-        event.preventDefault();
-        isMouseButtonDown = true;
-        shootWeapon();
-
-        const currentWeapon = availableWeapons.find(weapon => weapon.id === currentEquippedWeaponId);
-        if(currentWeapon && currentWeapon.id === 'weapon1'){
-             shootIntervalTimerId = setInterval(shootWeapon, gunShotInterval * 1000);
-        } else if (currentWeapon && currentWeapon.id === 'weapon2'){
-             shootIntervalTimerId = setInterval(shootWeapon, 1000);
-        }
-    }
-});
-
-document.addEventListener('mouseup', function(event) {
-    if (event.button === 0) {
-        isMouseButtonDown = false;
-
-        clearInterval(shootIntervalTimerId);
-        shootIntervalTimerId = null;
-    }
-});
-
-let isPointerLocked = false;
 
 const pointerLockChange = function () {
     isPointerLocked = document.pointerLockElement === document.body;
 };
 
-document.addEventListener('pointerlockchange', pointerLockChange, false);
-
-document.addEventListener('click', function () {
-    if (isGameCurrentlyActive && !isPointerLocked && !isMobileControlsEnabled) {
-        document.body.requestPointerLock();
-    }
-}, false);
-
-document.addEventListener('mousemove', function (event) {
-    if (isPointerLocked && isGameCurrentlyActive && !isMobileControlsEnabled) { 
-        const movementX = event.movementX || event.mozMovementX || event.webkitMovementX || 0;
-        const movementY = event.movementY || event.mozMovementY || event.webkitMovementY || 0;
-        playerObject.rotation.y -= movementX * 0.002;
-        gameCamera.rotation.x -= movementY * 0.002;
-        gameCamera.rotation.x = Math.max(-Math.PI / 2, Math.min(Math.PI / 2, gameCamera.rotation.x));
-        }
-}, false);
-
-let previousFrameTime = performance.now();
-
-let lookTouchIdentifier = null;
-let lookTouchLastX = 0;
-let lookTouchLastY = 0;
-
-document.body.addEventListener('touchstart', handleLookStart, { passive: false });
-document.body.addEventListener('touchmove', handleLookMove, { passive: false });
-document.body.addEventListener('touchend', handleLookEnd, { passive: false });
-document.body.addEventListener('touchcancel', handleLookEnd, { passive: false });
-
 function handleLookStart(e) {
     if (!isGameCurrentlyActive || !isMobileControlsEnabled) return;
-    
     for (let i = 0; i < e.changedTouches.length; i++) {
         const touch = e.changedTouches[i];
         const targetElement = touch.target;
-
-        if (targetElement.closest('.action-button') || targetElement.closest('.joystick-base')) {
-            continue; 
-        }
-
+        if (targetElement.closest('.action-button') || targetElement.closest('.joystick-base')) continue;
         if (lookTouchIdentifier === null) {
             e.preventDefault();
             lookTouchIdentifier = touch.identifier;
             lookTouchLastX = touch.clientX;
             lookTouchLastY = touch.clientY;
-            break; 
+            break;
         }
     }
 }
 
 function handleLookMove(e) {
     if (!isGameCurrentlyActive || !isMobileControlsEnabled || lookTouchIdentifier === null) return;
-    
     for (let i = 0; i < e.changedTouches.length; i++) {
         const touch = e.changedTouches[i];
         if (touch.identifier === lookTouchIdentifier) {
             e.preventDefault();
             const movementX = touch.clientX - lookTouchLastX;
             const movementY = touch.clientY - lookTouchLastY;
-
             playerObject.rotation.y -= movementX * 0.002;
             gameCamera.rotation.x -= movementY * 0.002;
             gameCamera.rotation.x = Math.max(-Math.PI / 2, Math.min(Math.PI / 2, gameCamera.rotation.x));
-
             lookTouchLastX = touch.clientX;
             lookTouchLastY = touch.clientY;
             break;
@@ -2461,7 +2413,6 @@ function handleLookMove(e) {
 
 function handleLookEnd(e) {
     if (lookTouchIdentifier === null) return;
-
     for (let i = 0; i < e.changedTouches.length; i++) {
         const touch = e.changedTouches[i];
         if (touch.identifier === lookTouchIdentifier) {
@@ -2473,77 +2424,65 @@ function handleLookEnd(e) {
 }
 
 function animate() {
+    requestAnimationFrame(animate);
     const currentTime = performance.now();
     const deltaTime = (currentTime - previousFrameTime) / 1000;
     previousFrameTime = currentTime;
-    requestAnimationFrame(animate);
+
+    TWEEN.update(currentTime); 
+
     const previousPlayerPosition = playerObject.position.clone();
-    
     playerVelocity.x -= playerVelocity.x * 10.0 * deltaTime;
     playerVelocity.z -= playerVelocity.z * 10.0 * deltaTime;
-    
     playerDirection.z = Number(isMovingForward) - Number(isMovingBackward);
     playerDirection.x = Number(isMovingLeft) - Number(isMovingRight);
     playerDirection.normalize();
-    
     const speed = 150.0;
     if (isMovingForward || isMovingBackward) playerVelocity.z -= playerDirection.z * speed * deltaTime;
     if (isMovingLeft || isMovingRight) playerVelocity.x -= playerDirection.x * speed * deltaTime;
-    
-
     playerObject.translateX(playerVelocity.x * deltaTime);
     playerObject.translateZ(playerVelocity.z * deltaTime);
-
     playerVelocity.y -= gameGravity * deltaTime;
     playerObject.position.y += playerVelocity.y * deltaTime;
-
     if (playerObject.position.y <= 1.6) {
         playerObject.position.y = 1.6;
         playerVelocity.y = 0;
         isPlayerJumping = false;
         canPlayerJump = true;
     }
-
     if (isGameCurrentlyActive) {
         generateTilesAroundPlayer();
     }
-
     let isCollisionDetected = false;
     const playerPositionXZ = new THREE.Vector2(playerObject.position.x, playerObject.position.z);
     for (let i = 0; i < gameTrees.length; i++) {
         const treePosition = gameTrees[i];
         const treePositionXZ = new THREE.Vector2(treePosition.x, treePosition.z);
         const distance = playerPositionXZ.distanceTo(treePositionXZ);
-
         if (distance < 1.5 && playerObject.position.y < 4.0) {
             isCollisionDetected = true;
             break;
         }
     }
-
     if (isCollisionDetected) {
         playerObject.position.copy(previousPlayerPosition);
         if (playerVelocity.y > 0) {
             playerVelocity.y = 0;
         }
     }
-
     if (isGameCurrentlyActive) {
         updateBullets(deltaTime);
-    }
-
-    if (bossDroppedVapeWeapon && !hasPlayerPickedUpVapeWeapon) {
-        const distanceToWeapon = playerObject.position.distanceTo(bossDroppedVapeWeapon.position);
-        if (distanceToWeapon < 2) {
-            hasPlayerPickedUpVapeWeapon = true;
-
-            gameScene.remove(bossDroppedVapeWeapon);
-            bossDroppedVapeWeapon = null;
-            updateHUDDisplay();
+        
+        if (bossDroppedVapeWeapon && !hasPlayerPickedUpVapeWeapon) {
+            const distanceToWeapon = playerObject.position.distanceTo(bossDroppedVapeWeapon.position);
+            if (distanceToWeapon < 2) {
+                hasPlayerPickedUpVapeWeapon = true;
+                gameScene.remove(bossDroppedVapeWeapon);
+                bossDroppedVapeWeapon = null;
+                updateHUDDisplay();
+            }
         }
-    }
-
-    if (isGameCurrentlyActive) {
+        
         for (let i = gameBullets.length - 1; i >= 0; i--) {
             const bullet = gameBullets[i];
             if (bullet.userData.isBossBullet) {
@@ -2556,438 +2495,211 @@ function animate() {
                 }
             }
         }
+        
         for (let i = playerGameBullets.length - 1; i >= 0; i--) {
             const bullet = playerGameBullets[i];
-            if (bullet.userData.isPlayerBullet) {
-                let bulletHitEnemy = false;
-                for (let j = gameEnemies.length - 1; j >= 0; j--) {
-                    const enemy = gameEnemies[j];
-                    const distanceToEnemy = bullet.position.distanceTo(enemy.position);
-                    if (distanceToEnemy < 1.5) {
-                        enemy.userData.health -= bullet.userData.damage;
-                        updateHealthBarForEnemy(enemy);
-                        if (enemy.userData.health <= 0) {
-                            gameScene.remove(enemy);
-                            gameEnemies.splice(j, 1);
-                            killCount++;
-                            updateHUDDisplay();
-                        }
-                        gameScene.remove(bullet);
-                        playerGameBullets.splice(i, 1);
-                        bulletHitEnemy = true;
-                        break;
-                    }
-                }
-                if (gameBoss && !bulletHitEnemy) {
-                    const distanceToBoss = bullet.position.distanceTo(gameBoss.position);
-                    if (distanceToBoss < 2.5) {
-                        bossHealth -= bullet.userData.damage;
-                        if (bossHealth < 0) bossHealth = 0;
-                        updateBossHealthBar();
-                        gameScene.remove(bullet);
-                        playerGameBullets.splice(i, 1);
-                        bulletHitEnemy = true;
-                        if (bossHealth <= 0) {
-                            bossHealth = 0;
-                            updateBossHealthBar();
+            if (!bullet.parent) {
+                playerGameBullets.splice(i, 1);
+                continue;
+            }
+            let hitTarget = null;
 
-                            killCount++;
-                            updateHUDDisplay();
-                            bossDroppedVapeWeapon = dropBossWeapon(gameBoss.position);
-                            endBossFight();
-                            generateEnemies();
-                        }
-                    }
-                }
-            } else if (bullet.userData.isVapeBullet) {
-                let bulletHitEnemy = false;
-                for (let j = gameEnemies.length - 1; j >= 0; j--) {
-                    const enemy = gameEnemies[j];
-                    const distanceToEnemy = bullet.position.distanceTo(enemy.position);
-                    if (distanceToEnemy < 1.5) {
-                        enemy.userData.health -= bullet.userData.damage;
-                        updateHealthBarForEnemy(enemy);
-                        if (enemy.userData.health <= 0) {
-                            gameScene.remove(enemy);
-                            gameEnemies.splice(j, 1);
-                            killCount++;
-                            updateHUDDisplay();
-                        }
-                        gameScene.remove(bullet);
-                        playerGameBullets.splice(i, 1);
-                        bulletHitEnemy = true;
-                        break;
-                    }
-                }
-                if (gameBoss && !bulletHitEnemy) {
-                    const distanceToBoss = bullet.position.distanceTo(gameBoss.position);
-                    if (distanceToBoss < 2.5) {
-                        bossHealth -= bullet.userData.damage;
-                        if (bossHealth < 0) bossHealth = 0;
-                        updateBossHealthBar();
-                        gameScene.remove(bullet);
-                        playerGameBullets.splice(i, 1);
-                        bulletHitEnemy = true;
-                        if (bossHealth <= 0) {
-                            bossHealth = 0;
-                            updateBossHealthBar();
-
-                            killCount++;
-                            updateHUDDisplay();
-                            bossDroppedVapeWeapon = dropBossWeapon(gameBoss.position);
-                            endBossFight();
-                            generateEnemies();
-                        }
-                    }
+            for (let j = 0; j < gameEnemies.length; j++) {
+                const enemy = gameEnemies[j];
+                if (bullet.position.distanceTo(enemy.position) < 1.5) {
+                    hitTarget = enemy;
+                    break;
                 }
             }
-        }
-    }
 
-    if (isGameCurrentlyActive) {
-        const currentTime = new Date().getTime();
-        const elapsedTimeSinceLastIncrease = currentTime - lastDifficultyIncreaseGameTime;
+            if (!hitTarget && gameBoss) {
+                if (bullet.position.distanceTo(gameBoss.position) < 2.5) {
+                    hitTarget = gameBoss;
+                }
+            }
+
+            if (hitTarget) {
+                if (bullet.userData.isVapeBullet) {
+                     if (hitTarget.userData.isBossMesh) {
+                         bossHealth -= bullet.userData.damage;
+                         if (bossHealth < 0) bossHealth = 0;
+                         updateBossHealthBar();
+                         if (bossHealth <= 0) {
+                             killCount++;
+                             updateHUDDisplay();
+                             if (!hasPlayerPickedUpVapeWeapon) bossDroppedVapeWeapon = dropBossWeapon(gameBoss.position);
+                             endBossFight();
+                             generateEnemies();
+                         }
+                     } else {
+                        const enemyIndex = gameEnemies.indexOf(hitTarget);
+                        hitTarget.userData.health -= bullet.userData.damage;
+                        updateHealthBarForEnemy(hitTarget);
+                        if (hitTarget.userData.health <= 0) {
+                            if (enemyIndex > -1) {
+                                gameScene.remove(hitTarget);
+                                gameEnemies.splice(enemyIndex, 1);
+                                killCount++;
+                                updateHUDDisplay();
+                            }
+                        }
+                     }
+                }
+                gameScene.remove(bullet);
+                playerGameBullets.splice(i, 1);
+            }
+        }
+
+        const gameTime = new Date().getTime();
+        const elapsedTimeSinceLastIncrease = gameTime - lastDifficultyIncreaseGameTime;
         if (elapsedTimeSinceLastIncrease >= 2 * 60 * 1000) {
             currentEnemySpeed *= 1.1;
             maxActiveEnemies += 3;
             if (currentEnemySpeed > 10.0) currentEnemySpeed = 10.0;
             if (maxActiveEnemies > 25) maxActiveEnemies = 25;
-            lastDifficultyIncreaseGameTime = currentTime;
+            lastDifficultyIncreaseGameTime = gameTime;
         }
-
         const enemyUpdateDistance = 3000;
         const maxEnemyDistance = 5000;
-
+        
         for (let i = gameEnemies.length - 1; i >= 0; i--) {
             const enemy = gameEnemies[i];
             const distanceToPlayer = enemy.position.distanceTo(playerObject.position);
-
+            
             if (distanceToPlayer < enemyUpdateDistance) {
-                let enemyDirection = new THREE.Vector3();
-                enemyDirection.subVectors(playerObject.position.clone().setY(0), enemy.position.clone().setY(0));
-                enemyDirection.normalize();
-
-                let avoidDirection = new THREE.Vector3(0, 0, 0);
-                let isObstacleDetected = false;
-
+                let seekVector = new THREE.Vector3().subVectors(playerObject.position, enemy.position);
+                
+                let avoidTreesVector = new THREE.Vector3(0, 0, 0);
                 for (let j = 0; j < gameTrees.length; j++) {
                     const treePosition = gameTrees[j];
                     const distanceToTree = enemy.position.distanceTo(treePosition);
                     if (distanceToTree < 3) {
-                        let offset = new THREE.Vector3();
-                        offset.subVectors(enemy.position, treePosition);
-                        offset.y = 0;
-                        offset.normalize();
-                        offset.divideScalar(distanceToTree);
-                        avoidDirection.add(offset);
-                        isObstacleDetected = true;
+                        let offset = new THREE.Vector3().subVectors(enemy.position, treePosition);
+                        avoidTreesVector.add(offset.divideScalar(distanceToTree * distanceToTree));
                     }
                 }
 
-                if (isObstacleDetected) {
-                    avoidDirection.normalize();
-                    enemyDirection.add(avoidDirection);
-                    enemyDirection.normalize();
+                let separationVector = new THREE.Vector3(0, 0, 0);
+                const separationDistance = 2.5; 
+                for (let j = 0; j < gameEnemies.length; j++) {
+                    if (i === j) continue;
+                    const otherEnemy = gameEnemies[j];
+                    const distanceToOther = enemy.position.distanceTo(otherEnemy.position);
+                    if (distanceToOther < separationDistance && distanceToOther > 0) {
+                        let repulsion = new THREE.Vector3().subVectors(enemy.position, otherEnemy.position);
+                        repulsion.normalize();
+                        repulsion.divideScalar(distanceToOther); 
+                        separationVector.add(repulsion);
+                    }
                 }
-
-                enemy.position.addScaledVector(enemyDirection, currentEnemySpeed * deltaTime);
+                
+                seekVector.normalize().multiplyScalar(0.8);
+                avoidTreesVector.multiplyScalar(1.2);
+                separationVector.multiplyScalar(1.5);
+                
+                let finalMoveVector = new THREE.Vector3().add(seekVector).add(avoidTreesVector).add(separationVector);
+                finalMoveVector.setY(0).normalize();
+                
+                enemy.position.addScaledVector(finalMoveVector, currentEnemySpeed * deltaTime);
                 enemy.position.y = 1;
-
-                enemy.traverse(function(child) {
-                    if (child.userData.isEnemyMesh) {
-                        const enemyPositionWorld = new THREE.Vector3();
-                        enemy.getWorldPosition(enemyPositionWorld);
-                        const cameraPositionWorld = new THREE.Vector3();
-                        gameCamera.getWorldPosition(cameraPositionWorld);
-                        const dx = cameraPositionWorld.x - enemyPositionWorld.x;
-                        const dz = cameraPositionWorld.z - enemyPositionWorld.z;
-                        const angle = Math.atan2(dx, dz);
-                        enemy.rotation.set(0, angle, 0);
-                    }
-                });
+                
+                const angle = Math.atan2(playerObject.position.x - enemy.position.x, playerObject.position.z - enemy.position.z);
+                enemy.rotation.y = angle;
 
                 if (distanceToPlayer < 1.5 && Math.abs(playerObject.position.y - enemy.position.y) < 2.0) {
                     takePlayerDamage(enemy.userData.damage);
                 }
-
+                
                 if (distanceToPlayer < 10) {
                     if (enemy.userData.healthBar) {
                         enemy.userData.healthBar.visible = true;
-                        enemy.userData.healthBar.rotation.copy(gameCamera.rotation);
+                        enemy.userData.healthBar.quaternion.copy(gameCamera.quaternion);
                     }
                 } else {
                     if (enemy.userData.healthBar) {
                         enemy.userData.healthBar.visible = false;
                     }
                 }
-            } else {
-                enemy.position.y = 1;
             }
-
+            
             if (distanceToPlayer > maxEnemyDistance) {
                 gameScene.remove(enemy);
                 gameEnemies.splice(i, 1);
             }
         }
-
+        
         if (gameBoss) {
             const distanceToPlayer = gameBoss.position.distanceTo(playerObject.position);
             if (distanceToPlayer < enemyUpdateDistance) {
-                let bossDirection = new THREE.Vector3();
-                bossDirection.subVectors(playerObject.position.clone().setY(0), gameBoss.position.clone().setY(0));
-                bossDirection.normalize();
-
-                let avoidDirection = new THREE.Vector3(0, 0, 0);
-                let isObstacleDetected = false;
-                for (let j = 0; j < gameTrees.length; j++) {
-                    const treePos = gameTrees[j];
-                    const distanceToTree = gameBoss.position.distanceTo(treePos);
-
-                    if (distanceToTree < 3) {
-                        let offset = new THREE.Vector3();
-                        offset.subVectors(gameBoss.position, treePos);
-                        offset.y = 0;
-                        offset.normalize();
-                        offset.divideScalar(distanceToTree);
-
-                        avoidDirection.add(offset);
-                        isObstacleDetected = true;
-                    }
-                }
-
-                if (isObstacleDetected) {
-                    avoidDirection.normalize();
-                    bossDirection.add(avoidDirection);
-                    bossDirection.normalize();
-                }
-
+                let bossDirection = new THREE.Vector3().subVectors(playerObject.position, gameBoss.position).setY(0).normalize();
                 gameBoss.position.addScaledVector(bossDirection, currentEnemySpeed * deltaTime * 0.5);
                 gameBoss.position.y = 1;
-
-               gameBoss.traverse(function(child) {
-    if (child.userData.isBossMesh) {
-        const bossPositionWorld = new THREE.Vector3();
-        gameBoss.getWorldPosition(bossPositionWorld);
-        const playerPositionWorld = new THREE.Vector3();
-        gameCamera.getWorldPosition(playerPositionWorld);
-        const dx = playerPositionWorld.x - bossPositionWorld.x;
-        const dz = playerPositionWorld.z - bossPositionWorld.z;
-        const angle = Math.atan2(dx, dz);
-        gameBoss.rotation.set(0, angle, 0);
-    }
-});
-
+                const angle = Math.atan2(playerObject.position.x - gameBoss.position.x, playerObject.position.z - gameBoss.position.z);
+                gameBoss.rotation.y = angle;
+                
                 if (distanceToPlayer < 2.5 && Math.abs(playerObject.position.y - gameBoss.position.y) < 2.0) {
                     takePlayerDamage(currentBossDamage);
                 }
                 bossShoot();
-            } else {
-                gameBoss.position.y = 1;
             }
-
-            if (gameBoss && gameBoss.userData.healthBar) {
-                gameBoss.userData.healthBar.position.copy(gameBoss.position).add(new THREE.Vector3(0, 3.5, 0));
-                const directionToPlayer = new THREE.Vector3();
-                directionToPlayer.subVectors(playerObject.position, gameBoss.userData.healthBar.position).normalize();
-                const up = new THREE.Vector3(0, 1, 0);
-                const matrix = new THREE.Matrix4();
-                matrix.lookAt(playerObject.position, gameBoss.userData.healthBar.position, up);
-                gameBoss.userData.healthBar.quaternion.setFromRotationMatrix(matrix);
+            if (gameBoss.userData.healthBar) {
+                gameBoss.userData.healthBar.quaternion.copy(gameCamera.quaternion);
             }
         }
 
-        const currentTimeSec = (new Date().getTime() - gameStartTimeEpoch) / 1000;
-        if (!isBossAlreadySpawned && currentTimeSec >= timeToNextBossSpawn) {
+        const elapsedTimeSec = (new Date().getTime() - gameStartTimeEpoch) / 1000;
+        if (!isBossAlreadySpawned && elapsedTimeSec >= timeToNextBossSpawn) {
             isBossAlreadySpawned = true;
             createBossEnemy();
         }
-    }
-
-    const currentTimeSec = currentTime / 1000;
-    if (currentTimeSec >= muzzleFlashEndTimeEpoch) {
-        gunMuzzleFlash.visible = false;
-    } else {
-        gunMuzzleFlash.visible = true;
-        const remainingTime = muzzleFlashEndTimeEpoch - currentTimeSec;
-        gunMuzzleFlash.material.opacity = remainingTime / 0.05;
-    }
-
-    if (isGunAnimatingReload) {
-        gunReloadAnimationProgress += deltaTime;
-        const halfDuration = gunReloadAnimationDuration / 2;
-        if (gunReloadAnimationProgress <= halfDuration) {
-                       const t = gunReloadAnimationProgress / halfDuration;
-            gunWeaponMagazine.position.y = THREE.MathUtils.lerp(-0.25, -0.5, t);
-        } else if (gunReloadAnimationProgress <= gunReloadAnimationDuration) {
-                       const t = (gunReloadAnimationProgress - halfDuration) / halfDuration;
-            gunWeaponMagazine.position.y = THREE.MathUtils.lerp(-0.5, -0.25, t);
+        
+        const currentTimeSec = currentTime / 1000;
+        if (currentTimeSec >= muzzleFlashEndTimeEpoch) {
+            gunMuzzleFlash.material.opacity = 0;
         } else {
-            gunWeaponMagazine.position.y = -0.25;
-            isGunAnimatingReload = false;
-            currentGunAmmo = gunMagazineSize;
-            isGunReloading = false;
-            displayedGunAmmo = currentGunAmmo;
-            updateHUDDisplay();
+            gunMuzzleFlash.material.opacity = 1 - (currentTimeSec - (muzzleFlashEndTimeEpoch - 0.05)) / 0.05;
         }
-    }
-
-    regenerateVapeAmmo(deltaTime);
-    handleCollisions();
-    TWEEN.update();
-
-    if (isGameCurrentlyActive) {
-        updateHUDDisplay();
-    }
-
-    gameRenderer.render(gameScene, gameCamera);
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-    const joystickBase = document.getElementById('joystick-base');
-    const joystickThumb = document.getElementById('joystick-thumb');
-    const shootButton = document.getElementById('shoot-button');
-    const jumpButton = document.getElementById('jump-button');
-    const reloadButton = document.getElementById('reload-button');
-    const weapon1Button = document.getElementById('weapon1-button');
-    const weapon2Button = document.getElementById('weapon2-button');
-    
-    joystickBase.addEventListener('touchstart', handleJoystickStart, { passive: false });
-    joystickBase.addEventListener('touchmove', handleJoystickMove, { passive: false });
-    joystickBase.addEventListener('touchend', handleJoystickEnd, { passive: false });
-    
-    shootButton.addEventListener('touchstart', (e) => {
-        e.preventDefault();
-        if (isGameCurrentlyActive) {
-            isMouseButtonDown = true;
-            shootWeapon();
-            const currentWeapon = availableWeapons.find(w => w.id === currentEquippedWeaponId);
-            if (currentWeapon) {
-                shootIntervalTimerId = setInterval(shootWeapon, 
-                    currentWeapon.id === 'weapon1' ? gunShotInterval * 1000 : 1000);
+        if (m16MuzzleFlash) {
+            if (currentTimeSec >= m16MuzzleFlashEndTimeEpoch) {
+                m16MuzzleFlash.material.opacity = 0;
+            } else {
+                m16MuzzleFlash.material.opacity = 1 - (currentTimeSec - (m16MuzzleFlashEndTimeEpoch - 0.05)) / 0.05;
             }
         }
-    }, { passive: false });
-    
-    shootButton.addEventListener('touchend', (e) => {
-        e.preventDefault();
-        isMouseButtonDown = false;
-        clearInterval(shootIntervalTimerId);
-        shootIntervalTimerId = null;
-    }, { passive: false });
-    
-    jumpButton.addEventListener('touchstart', (e) => {
-        e.preventDefault();
-        if (isGameCurrentlyActive && canPlayerJump && !isPlayerJumping) {
-            isPlayerJumping = true;
-            canPlayerJump = false;
-            playerVelocity.y = playerJumpStrength;
+        if (isGunAnimatingReload) {
+            gunReloadAnimationProgress += deltaTime;
+            const halfDuration = gunReloadAnimationDuration / 2;
+            if (gunReloadAnimationProgress <= halfDuration) {
+                const t = gunReloadAnimationProgress / halfDuration;
+                gunWeaponMagazine.position.y = THREE.MathUtils.lerp(-0.25, -0.5, t);
+            } else if (gunReloadAnimationProgress <= gunReloadAnimationDuration) {
+                const t = (gunReloadAnimationProgress - halfDuration) / halfDuration;
+                gunWeaponMagazine.position.y = THREE.MathUtils.lerp(-0.5, -0.25, t);
+            } else {
+                gunWeaponMagazine.position.y = -0.25;
+                isGunAnimatingReload = false;
+                currentGunAmmo = gunMagazineSize;
+                isGunReloading = false;
+                displayedGunAmmo = currentGunAmmo;
+                updateHUDDisplay();
+            }
         }
-    }, { passive: false });
-    
-    reloadButton.addEventListener('touchstart', (e) => {
-        e.preventDefault();
-        if (isGameCurrentlyActive) {
-            reloadGun();
-        }
-    }, { passive: false });
-    
-    weapon1Button.addEventListener('touchstart', (e) => {
-        e.preventDefault();
-        if (isGameCurrentlyActive) {
-            setEquippedWeapon('weapon1');
-        }
-    }, { passive: false });
-    
-    weapon2Button.addEventListener('touchstart', (e) => {
-        e.preventDefault();
-        if (isGameCurrentlyActive && hasPlayerPickedUpVapeWeapon) {
-            setEquippedWeapon('weapon2');
-        }
-    }, { passive: false });
-    
-    function handleJoystickStart(e) {
-        e.preventDefault();
-        isJoystickActive = true;
-        updateJoystick(e.touches[0]);
+        
+        regenerateVapeAmmo(deltaTime);
+        updateHUDDisplay();
     }
     
-    function handleJoystickMove(e) {
-        e.preventDefault();
-        if (isJoystickActive) {
-            updateJoystick(e.touches[0]);
-        }
-    }
-    
-    function handleJoystickEnd(e) {
-        e.preventDefault();
-        isJoystickActive = false;
-        joystickDeltaX = 0;
-        joystickDeltaY = 0;
-        joystickThumb.style.transform = 'translate(0px, 0px)';
-        
-        isMovingForward = false;
-        isMovingBackward = false;
-        isMovingLeft = false;
-        isMovingRight = false;
-    }
-    
-    function updateJoystick(touch) {
-        const rect = joystickBase.getBoundingClientRect();
-        const centerX = rect.left + rect.width / 2;
-        const centerY = rect.top + rect.height / 2;
-        
-        const touchX = touch.clientX;
-        const touchY = touch.clientY;
-        
-        const deltaX = touchX - centerX;
-        const deltaY = touchY - centerY;
-        
-        const distance = Math.min(Math.sqrt(deltaX * deltaX + deltaY * deltaY), 50);
-        const angle = Math.atan2(deltaY, deltaX);
-        
-        const clampedX = Math.cos(angle) * distance;
-        const clampedY = Math.sin(angle) * distance;
-        
-        joystickThumb.style.transform = `translate(${clampedX}px, ${clampedY}px)`;
-        
-        joystickDeltaX = clampedX / 50;
-        joystickDeltaY = clampedY / 50;
-        
-        if (joystickDeltaY < -0.3) {
-            isMovingForward = true;
-            isMovingBackward = false;
-        } else if (joystickDeltaY > 0.3) {
-            isMovingForward = false;
-            isMovingBackward = true;
-        } else {
-            isMovingForward = false;
-            isMovingBackward = false;
-        }
-        
-        if (joystickDeltaX < -0.3) {
-            isMovingLeft = true;
-            isMovingRight = false;
-        } else if (joystickDeltaX > 0.3) {
-            isMovingLeft = false;
-            isMovingRight = true;
-        } else {
-            isMovingLeft = false;
-            isMovingRight = false;
-        }
-    }
-});
-
+    gameRenderer.clear();
+    gameRenderer.render(gameScene, gameCamera);
+    gameRenderer.clearDepth();
+    gameRenderer.render(weaponScene, weaponCamera);
+}
 
 function updateBullets(deltaTime) {
     for (let i = gameBullets.length - 1; i >= 0; i--) {
         const bullet = gameBullets[i];
-        bullet.position.add(bullet.userData.direction.clone().multiplyScalar(bullet.userData.speed * deltaTime));
-        bullet.material.opacity -= deltaTime * 0.5;
-        if (bullet.material.opacity <= 0) {
-            gameScene.remove(bullet);
-            gameBullets.splice(i, 1);
-            continue;
-        }
+        bullet.position.add(bullet.userData.velocity.clone().multiplyScalar(deltaTime));
+        
         if (bullet.position.distanceTo(playerObject.position) > 500) {
             gameScene.remove(bullet);
             gameBullets.splice(i, 1);
@@ -2996,51 +2708,32 @@ function updateBullets(deltaTime) {
 
     for (let i = playerGameBullets.length - 1; i >= 0; i--) {
         const bullet = playerGameBullets[i];
-        bullet.position.add(bullet.userData.direction.clone().multiplyScalar(bullet.userData.speed * deltaTime));
-         if (bullet.userData.isVapeBullet) {
-            bullet.material.opacity -= deltaTime * 0.5;
-            if (bullet.material.opacity <= 0) {
-                gameScene.remove(bullet);
-                playerGameBullets.splice(i, 1);
-                continue;
-            }
+        bullet.position.add(bullet.userData.velocity.clone().multiplyScalar(deltaTime));
+        
+        let shouldRemove = false;
+        if (bullet.userData.isTracer) {
+            bullet.userData.life -= deltaTime;
+            if (bullet.userData.life <= 0) shouldRemove = true;
+        } else if (bullet.userData.isVapeBullet) {
+            bullet.material.opacity -= deltaTime * 2.0;
+            if (bullet.material.opacity <= 0) shouldRemove = true;
         }
+
         if (bullet.position.distanceTo(playerObject.position) > 500) {
+            shouldRemove = true;
+        }
+
+        if (shouldRemove) {
             gameScene.remove(bullet);
             playerGameBullets.splice(i, 1);
         }
     }
 }
 
-function updateHealthBarsRotation() {
-    gameEnemies.forEach(enemy => {
-        if (enemy.userData.healthBar) {
-            enemy.userData.healthBar.rotation.copy(gameCamera.rotation);
-        }
-    });
-}
-
-function handleCollisions() {
-    playerGameBullets.forEach((bullet, index) => {
-        gameEnemies.forEach(enemy => {
-            if (bullet.position.distanceTo(enemy.position) < 1.5) {
-                enemy.userData.health -= bullet.userData.damage;
-                gameScene.remove(bullet);
-                playerGameBullets.splice(index, 1);
-                if (enemy.userData.health <= 0) {
-                    killCount++;
-                    updateHUDDisplay();
-                }
-            }
-        });
-    });
-}
-
 function generateTilesAroundPlayer() {
     const playerTileX = Math.floor(playerObject.position.x / gameTileSize);
     const playerTileZ = Math.floor(playerObject.position.z / gameTileSize);
     const range = 2;
-
     for (let x = playerTileX - range; x <= playerTileX + range; x++) {
         for (let z = playerTileZ - range; z <= playerTileZ + range; z++) {
             const tileKey = `${x},${z}`;
@@ -3049,7 +2742,6 @@ function generateTilesAroundPlayer() {
             }
         }
     }
-
     for (let key in gameTiles) {
         const [tileX, tileZ] = key.split(',').map(Number);
         if (Math.abs(tileX - playerTileX) > range + 1 || Math.abs(tileZ - playerTileZ) > range + 1) {
@@ -3067,7 +2759,6 @@ function createTile(x, z) {
     gameScene.add(tile);
     gameTileMeshes[`${x},${z}`] = tile;
     gameTiles[`${x},${z}`] = true;
-
     const numTrees = 9;
     const positions = [];
     for (let i = 0; i < numTrees; i++) {
@@ -3075,13 +2766,11 @@ function createTile(x, z) {
         const treeZ = z * gameTileSize + Math.random() * gameTileSize;
         positions.push(new THREE.Vector3(treeX, 0, treeZ));
     }
-
     const { trunkMesh, leavesMesh } = createTreeInstance(positions);
     gameScene.add(trunkMesh);
     gameScene.add(leavesMesh);
     gameTrees.push(...positions);
     gameTreeInstances[`${x},${z}`] = { trunkMesh, leavesMesh, positions };
-
     const enemiesPerTile = 3;
     for (let i = 0; i < enemiesPerTile; i++) {
         createEnemyInTile(x, z, true);
@@ -3095,7 +2784,6 @@ function removeTile(x, z) {
         gameScene.remove(tile);
         delete gameTileMeshes[tileKey];
     }
-
     const treeInstance = gameTreeInstances[tileKey];
     if (treeInstance) {
         gameScene.remove(treeInstance.trunkMesh);
@@ -3108,7 +2796,6 @@ function removeTile(x, z) {
         });
         delete gameTreeInstances[tileKey];
     }
-
     for (let i = gameEnemies.length - 1; i >= 0; i--) {
         const enemy = gameEnemies[i];
         const enemyTileX = Math.floor(enemy.position.x / gameTileSize);
@@ -3118,44 +2805,40 @@ function removeTile(x, z) {
             gameEnemies.splice(i, 1);
         }
     }
-
     delete gameTiles[tileKey];
 }
 
-
 function startGame() {
-    const menuElement = document.getElementById('menu');
-    menuElement.style.display = 'none';
+    menuContainerElement.style.display = 'none';
     const deathModalElement = document.getElementById('death-modal');
     deathModalElement.style.display = 'none';
-    
+
+    updateCameraFov();
+
     if (isMobileControlsEnabled) {
-        document.getElementById('mobile-hud').style.display = 'flex'; 
+        document.getElementById('mobile-hud').style.display = 'flex';
         document.getElementById('mobile-health-bar').style.display = 'block';
         document.getElementById('mobile-controls').style.display = 'block';
-        
         document.getElementById('hud').style.display = 'none';
         document.getElementById('health-bar').style.display = 'none';
+        document.querySelector('.hud-container').style.display = 'none';
     } else {
         document.getElementById('hud').style.display = 'block';
         document.getElementById('health-bar').style.display = 'block';
-        
+        document.querySelector('.hud-container').style.display = 'flex';
         document.getElementById('mobile-hud').style.display = 'none';
         document.getElementById('mobile-health-bar').style.display = 'none';
         document.getElementById('mobile-controls').style.display = 'none';
     }
-    
     document.getElementById('crosshair').style.display = 'block';
-
     hasPlayerPickedUpVapeWeapon = false;
     bossDroppedVapeWeapon = null;
-
-    currentEquippedWeaponId = isMobileControlsEnabled ? '' : 'weapon1'; 
-
+    currentEquippedWeaponId = isMobileControlsEnabled ? '' : 'weapon1';
+    setEquippedWeapon(currentEquippedWeaponId);
     const settings = difficultySettings[currentDifficulty];
     baseEnemyHealth = settings.enemyHealth;
+    
     baseBossHealth = settings.bossHealth;
-
     killCount = 0;
     currentPlayerHealth = 100;
     currentBossLevel = 1;
@@ -3163,6 +2846,8 @@ function startGame() {
     timeToNextBossSpawn = 300;
     currentEnemyDamage = 1;
     currentBossDamage = 2;
+    gameBoss = null;
+
     updateHealthBarDisplay();
     currentGunAmmo = gunMagazineSize;
     displayedGunAmmo = gunMagazineSize;
@@ -3170,21 +2855,21 @@ function startGame() {
     isGunAnimatingReload = false;
     gunReloadAnimationProgress = 0;
     currentVapeWeaponAmmo = vapeWeaponAmmo;
-    updateHUDDisplay(); 
+	currentM16Ammo = m16MagazineSize;
+	displayedM16Ammo = m16MagazineSize;
+    isM16Reloading = false;
+    updateHUDDisplay();
     clearGameObjects();
     playerObject.position.copy(getRandomSpawnPosition());
     playerObject.rotation.set(0, 0, 0);
     gameCamera.rotation.set(0, 0, 0);
-    playerVelocity.x = 0;
-    playerVelocity.y = 0;
-    playerVelocity.z = 0;
+    playerVelocity.set(0, 0, 0);
     gameStartTimeEpoch = new Date().getTime();
     isGameCurrentlyActive = true;
     currentEnemySpeed = 5.0;
     maxActiveEnemies = 25;
     lastDifficultyIncreaseGameTime = gameStartTimeEpoch;
-    gameEnemies.length = 0;
-    gameBoss = null;
+    
     generateTilesAroundPlayer();
     if (!isMobileControlsEnabled) {
         document.body.requestPointerLock();
@@ -3205,14 +2890,11 @@ function endBossFight() {
     }
     isBossAlreadySpawned = false;
     currentBossLevel++;
-
     timeToNextBossSpawn = currentBossLevel * 300;
-
     baseBossHealth += 50;
     currentBossDamage += 2;
     baseEnemyHealth += 10;
     currentEnemyDamage += 1;
-
     gameEnemies.forEach(enemy => {
         enemy.userData.maxHealth = baseEnemyHealth;
         enemy.userData.health = baseEnemyHealth;
@@ -3237,11 +2919,9 @@ function endGame() {
     isGameCurrentlyActive = false;
     document.exitPointerLock();
     document.getElementById('crosshair').style.display = 'none';
-
     hasPlayerPickedUpVapeWeapon = false;
     currentEquippedWeaponId = '';
     updateHUDDisplay();
-
     if (killCount > recordKillCount) {
         recordKillCount = killCount;
         saveGameProgress();
@@ -3250,13 +2930,11 @@ function endGame() {
         weaponSkins.golden.unlocked = true;
         saveSkinsUnlockStatus();
     }
-
 	if (recordKillCount >= hudSkins.neon.requiredKills) hudSkins.neon.unlocked = true;
 	if (recordKillCount >= hudSkins.retro.requiredKills) hudSkins.retro.unlocked = true;
 	if (recordKillCount >= hudSkins.futuristic.requiredKills) hudSkins.futuristic.unlocked = true;
 	if (recordKillCount >= hudSkins.military.requiredKills) hudSkins.military.unlocked = true;
 	saveSkinsUnlockStatus();
-
     updateMenuDisplay();
     document.getElementById('mobile-controls').style.display = 'none';
 }
@@ -3265,6 +2943,9 @@ function clearGameObjects() {
     gameEnemies.forEach(enemy => gameScene.remove(enemy));
     gameEnemies.length = 0;
     if (gameBoss) {
+        if (gameBoss.userData.healthBar) {
+            gameScene.remove(gameBoss.userData.healthBar);
+        }
         gameScene.remove(gameBoss);
         gameBoss = null;
     }
@@ -3272,7 +2953,6 @@ function clearGameObjects() {
     gameBullets.length = 0;
     playerGameBullets.forEach(bullet => gameScene.remove(bullet));
     playerGameBullets.length = 0;
-
     for (let key in gameTileMeshes) {
         gameScene.remove(gameTileMeshes[key]);
     }
@@ -3280,67 +2960,233 @@ function clearGameObjects() {
         gameScene.remove(gameTreeInstances[key].trunkMesh);
         gameScene.remove(gameTreeInstances[key].leavesMesh);
     }
-
     gameTiles = {};
     gameTileMeshes = {};
     gameTreeInstances = {};
     gameTrees.length = 0;
 }
 
-const restartButtonElement = document.getElementById('restartButton');
-const returnToMenuButtonElement = document.getElementById('returnToMenuButton');
-const menuContainerElement = document.getElementById('menu-container');
-
-restartButtonElement.addEventListener('click', function(event) {
+skinsButtonElement.addEventListener('click', (event) => {
     event.stopPropagation();
-    const deathModalElement = document.getElementById('death-modal');
-    deathModalElement.style.display = 'none';
+    skinsModalElement.style.display = 'flex';
+    updateSkinsMenuDisplay();
+});
+
+closeSkinsButtonElement.addEventListener('click', (event) => {
+    event.stopPropagation();
+    skinsModalElement.style.display = 'none';
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    const versionInfoElement = document.getElementById('version-info');
+    playButtonElement.addEventListener('click', () => {
+        versionInfoElement.style.display = 'none';
+    });
+    const mobileControlsToggle = document.getElementById('mobile-controls-toggle');
+    mobileControlsToggle.addEventListener('click', function() {
+        isMobileControlsEnabled = !isMobileControlsEnabled;
+        this.textContent = `Мобильное управление: ${isMobileControlsEnabled ? 'Вкл' : 'Выкл'}`;
+    });
+    const difficultyToggle = document.getElementById('difficulty-toggle');
+    const difficultyOptions = document.getElementById('difficulty-options');
+    const difficultyTabs = document.querySelectorAll('.difficulty-tab');
+    difficultyToggle.addEventListener('click', () => {
+        if (difficultyOptions.style.display === 'none' || difficultyOptions.style.display === '') {
+            difficultyOptions.style.display = 'flex';
+        } else {
+            difficultyOptions.style.display = 'none';
+        }
+    });
+    difficultyTabs.forEach(tab => {
+        tab.addEventListener('click', (event) => {
+            const selectedDifficulty = event.target.dataset.difficulty;
+            setActiveDifficultyTab(selectedDifficulty);
+        });
+    });
+    setActiveDifficultyTab('medium');
+
+    const joystickBase = document.getElementById('joystick-base');
+    const shootButton = document.getElementById('shoot-button');
+    const jumpButton = document.getElementById('jump-button');
+    const reloadButton = document.getElementById('reload-button');
+    const weapon1Button = document.getElementById('weapon1-button');
+    const weapon2Button = document.getElementById('weapon2-button');
+    const weapon3Button = document.getElementById('weapon3-button');
+    function handleJoystickStart(e) { e.preventDefault(); isJoystickActive = true; updateJoystick(e.touches[0]); }
+    function handleJoystickMove(e) { e.preventDefault(); if (isJoystickActive) updateJoystick(e.touches[0]); }
+    function handleJoystickEnd(e) { e.preventDefault(); isJoystickActive = false; joystickDeltaX = 0; joystickDeltaY = 0; joystickBase.querySelector('#joystick-thumb').style.transform = 'translate(0px, 0px)'; isMovingForward = false; isMovingBackward = false; isMovingLeft = false; isMovingRight = false; }
+    function updateJoystick(touch) {
+        const rect = joystickBase.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        const deltaX = touch.clientX - centerX;
+        const deltaY = touch.clientY - centerY;
+        const distance = Math.min(Math.sqrt(deltaX * deltaX + deltaY * deltaY), 50);
+        const angle = Math.atan2(deltaY, deltaX);
+        const clampedX = Math.cos(angle) * distance;
+        const clampedY = Math.sin(angle) * distance;
+        joystickBase.querySelector('#joystick-thumb').style.transform = `translate(${clampedX}px, ${clampedY}px)`;
+        joystickDeltaX = clampedX / 50;
+        joystickDeltaY = clampedY / 50;
+        isMovingForward = joystickDeltaY < -0.3;
+        isMovingBackward = joystickDeltaY > 0.3;
+        isMovingLeft = joystickDeltaX < -0.3;
+        isMovingRight = joystickDeltaX > 0.3;
+    }
+    joystickBase.addEventListener('touchstart', handleJoystickStart, { passive: false });
+    joystickBase.addEventListener('touchmove', handleJoystickMove, { passive: false });
+    joystickBase.addEventListener('touchend', handleJoystickEnd, { passive: false });
+    shootButton.addEventListener('touchstart', (e) => { e.preventDefault(); if (isGameCurrentlyActive) { isMouseButtonDown = true; shootWeapon(); const currentWeapon = availableWeapons.find(w => w.id === currentEquippedWeaponId); if (currentWeapon) { let interval = 1000; if (currentWeapon.id === 'weapon1') interval = gunShotInterval * 1000; if (currentWeapon.id === 'weapon3') interval = m16ShotInterval * 1000; if (interval < 1000) shootIntervalTimerId = setInterval(shootWeapon, interval); }}}, { passive: false });
+    shootButton.addEventListener('touchend', (e) => { e.preventDefault(); isMouseButtonDown = false; clearInterval(shootIntervalTimerId); shootIntervalTimerId = null; }, { passive: false });
+    jumpButton.addEventListener('touchstart', (e) => { e.preventDefault(); if (isGameCurrentlyActive && canPlayerJump && !isPlayerJumping) { isPlayerJumping = true; canPlayerJump = false; playerVelocity.y = playerJumpStrength; }}, { passive: false });
+    reloadButton.addEventListener('touchstart', (e) => { e.preventDefault(); if (isGameCurrentlyActive) reloadGun(); }, { passive: false });
+    weapon1Button.addEventListener('touchstart', (e) => { e.preventDefault(); if (isGameCurrentlyActive) setEquippedWeapon('weapon1'); }, { passive: false });
+    weapon2Button.addEventListener('touchstart', (e) => { e.preventDefault(); if (isGameCurrentlyActive && hasPlayerPickedUpVapeWeapon) setEquippedWeapon('weapon2'); }, { passive: false });
+	weapon3Button.addEventListener('touchstart', (e) => { e.preventDefault(); if (isGameCurrentlyActive) setEquippedWeapon('weapon3'); }, { passive: false });
+});
+
+toggleVersionButton.addEventListener('click', () => {
+    if (versionInfoDisplayElement.style.display === 'none' || !versionInfoDisplayElement.style.display) {
+        versionInfoDisplayElement.style.display = 'block';
+        toggleVersionButton.textContent = 'Скрыть версии';
+    } else {
+        versionInfoDisplayElement.style.display = 'none';
+        toggleVersionButton.textContent = 'Показать версии';
+    }
+});
+
+document.addEventListener('keydown', (event) => {
+    if (!isGameCurrentlyActive || isMobileControlsEnabled) return;
+    if (['KeyW', 'KeyA', 'KeyS', 'KeyD', 'KeyR', 'Space'].includes(event.code)) event.preventDefault();
+    switch (event.code) {
+        case 'KeyW': isMovingForward = true; break;
+        case 'KeyS': isMovingBackward = true; break;
+        case 'KeyA': isMovingLeft = true; break;
+        case 'KeyD': isMovingRight = true; break;
+        case 'KeyR': reloadGun(); break;
+        case 'Space': if (canPlayerJump && !isPlayerJumping) { isPlayerJumping = true; canPlayerJump = false; playerVelocity.y = playerJumpStrength; } break;
+        case 'Digit1': setEquippedWeapon('weapon1'); isDigitKey1Pressed = true; break;
+        case 'Digit2': if(hasPlayerPickedUpVapeWeapon) { setEquippedWeapon('weapon2'); isDigitKey2Pressed = true; } break;
+        case 'Digit3': setEquippedWeapon('weapon3'); isDigitKey3Pressed = true; break;
+    }
+});
+
+document.addEventListener('keyup', (event) => {
+    if (!isGameCurrentlyActive || isMobileControlsEnabled) return;
+    if (['KeyW', 'KeyA', 'KeyS', 'KeyD'].includes(event.code)) event.preventDefault();
+    switch (event.code) {
+        case 'KeyW': isMovingForward = false; break;
+        case 'KeyS': isMovingBackward = false; break;
+        case 'KeyA': isMovingLeft = false; break;
+        case 'KeyD': isMovingRight = false; break;
+        case 'Digit1': isDigitKey1Pressed = false; break;
+        case 'Digit2': isDigitKey2Pressed = false; break;
+        case 'Digit3': isDigitKey3Pressed = false; break;
+    }
+});
+
+document.addEventListener('mousedown', (event) => {
+    if (isGameCurrentlyActive && isPointerLocked && event.button === 0) {
+        event.preventDefault();
+        isMouseButtonDown = true;
+        shootWeapon();
+        const currentWeapon = availableWeapons.find(weapon => weapon.id === currentEquippedWeaponId);
+        if (currentWeapon) {
+            let interval = 1000;
+            if (currentWeapon.id === 'weapon1') interval = gunShotInterval * 1000;
+            if (currentWeapon.id === 'weapon3') interval = m16ShotInterval * 1000;
+            if(interval < 1000) shootIntervalTimerId = setInterval(shootWeapon, interval);
+        }
+    }
+});
+
+document.addEventListener('mouseup', (event) => {
+    if (event.button === 0) {
+        isMouseButtonDown = false;
+        clearInterval(shootIntervalTimerId);
+        shootIntervalTimerId = null;
+    }
+});
+
+document.addEventListener('pointerlockchange', pointerLockChange, false);
+document.addEventListener('click', (event) => {
+    if (event.target.tagName === 'BUTTON') {
+        return;
+    }
+
+    if (isGameCurrentlyActive && !isPointerLocked && !isMobileControlsEnabled) {
+        document.body.requestPointerLock();
+    }
+}, false);
+
+document.addEventListener('mousemove', (event) => {
+    if (isPointerLocked && isGameCurrentlyActive && !isMobileControlsEnabled) {
+        const movementX = event.movementX || event.mozMovementX || event.webkitMovementX || 0;
+        const movementY = event.movementY || event.mozMovementY || event.webkitMovementY || 0;
+        playerObject.rotation.y -= movementX * 0.002;
+        gameCamera.rotation.x -= movementY * 0.002;
+        gameCamera.rotation.x = Math.max(-Math.PI / 2, Math.min(Math.PI / 2, gameCamera.rotation.x));
+    }
+}, false);
+
+document.body.addEventListener('touchstart', handleLookStart, { passive: false });
+document.body.addEventListener('touchmove', handleLookMove, { passive: false });
+document.body.addEventListener('touchend', handleLookEnd, { passive: false });
+document.body.addEventListener('touchcancel', handleLookEnd, { passive: false });
+
+restartButtonElement.addEventListener('click', (event) => {
+    event.stopPropagation();
+    document.getElementById('death-modal').style.display = 'none';
     startGame();
 });
 
-returnToMenuButtonElement.addEventListener('click', function(event) {
-  event.stopPropagation();
-  const deathModalElement = document.getElementById('death-modal');
-  deathModalElement.style.display = 'none';
-  document.getElementById('crosshair').style.display = 'none';
-  const menuElement = document.getElementById('menu');
-  menuElement.style.display = 'flex';
-  menuContainerElement.style.display = 'flex';
-  document.getElementById('hud').style.display = 'none';
-  document.getElementById('health-bar').style.display = 'none';
-  document.getElementById('mobile-hud').style.display = 'none';
-  document.getElementById('mobile-health-bar').style.display = 'none';
-  document.getElementById('mobile-controls').style.display = 'none';
-  isGameCurrentlyActive = false;
-  toggleVersionButton.style.display = 'block';
-  toggleVersionButton.textContent = 'Показать версии';
-  versionInfoDisplayElement.style.display = 'none';
+returnToMenuButtonElement.addEventListener('click', (event) => {
+    event.stopPropagation();
+    document.getElementById('death-modal').style.display = 'none';
+    document.getElementById('crosshair').style.display = 'none';
+    document.getElementById('menu').style.display = 'flex';
+    menuContainerElement.style.display = 'flex';
+    document.getElementById('hud').style.display = 'none';
+    document.getElementById('health-bar').style.display = 'none';
+    document.querySelector('.hud-container').style.display = 'none';
+    document.getElementById('mobile-hud').style.display = 'none';
+    document.getElementById('mobile-health-bar').style.display = 'none';
+    document.getElementById('mobile-controls').style.display = 'none';
+    isGameCurrentlyActive = false;
+    toggleVersionButton.style.display = 'block';
+    toggleVersionButton.textContent = 'Показать версии';
+    versionInfoDisplayElement.style.display = 'none';
 });
 
-const playButtonElement = document.getElementById('playButton');
-playButtonElement.addEventListener('click', function(event) {
+playButtonElement.addEventListener('click', (event) => {
     event.stopPropagation();
     startGame();
     menuContainerElement.style.display = 'none';
 });
 
-window.addEventListener('resize', function() {
-    gameCamera.aspect = window.innerWidth / window.innerHeight;
-    gameCamera.updateProjectionMatrix();
-    gameRenderer.setSize(window.innerWidth, window.innerHeight);
+window.addEventListener('resize', () => {
+    if(gameCamera && gameRenderer) {
+        gameCamera.aspect = window.innerWidth / window.innerHeight;
+        gameCamera.updateProjectionMatrix();
+
+        weaponCamera.aspect = window.innerWidth / window.innerHeight;
+        weaponCamera.updateProjectionMatrix();
+
+        gameRenderer.setSize(window.innerWidth, window.innerHeight);
+    }
 }, false);
 
 loadGameProgress();
 loadSkinsUnlockStatus();
-applyHudSkin(currentHudSkin);
 initScene();
+applyHudSkin(currentHudSkin);
 updateGunSkin();
 updateMenuDisplay();
 updateHealthBarDisplay();
 updateHUDDisplay();
 animate();
-</script>
-<div id="version">Версия 0.0.1.0(mobile-update)</div>
-</body>
 
+</script>
+<div id="version">Версия 0.0.1.1(M16-update)</div>
+</body>
 </html>
