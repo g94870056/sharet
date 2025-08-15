@@ -40,7 +40,7 @@ canvas { display: block; }
     text-shadow: 2px 2px 4px #00ffff;
     z-index: 20;
 }
-#playButton, #skinsButton, #restartButton, #returnToMenuButton, #closeSkinsButton, #toggle-versions, #death-modal-content button, #skins-modal-content button, #mobile-controls-toggle, #current-difficulty {
+#playButton, #skinsButton, #arsenalButton, #restartButton, #returnToMenuButton, #closeSkinsButton, #closeArsenalButton, #closeWeaponSkinsButton, #toggle-versions, #death-modal-content button, #skins-modal-content button, #mobile-controls-toggle, #current-difficulty {
     font-size: 1.2em;
     padding: 12px 20px;
     margin: 8px 0;
@@ -56,7 +56,7 @@ canvas { display: block; }
     max-width: 300px;
     white-space: nowrap;
 }
-#playButton:hover, #skinsButton:hover, #restartButton:hover, #returnToMenuButton:hover, #closeSkinsButton:hover, #toggle-versions:hover, #death-modal-content button:hover, #skins-modal-content button:hover, #mobile-controls-toggle:hover, #current-difficulty:hover {
+#playButton:hover, #skinsButton:hover, #arsenalButton:hover, #restartButton:hover, #returnToMenuButton:hover, #closeSkinsButton:hover, #closeArsenalButton:hover, #closeWeaponSkinsButton:hover, #toggle-versions:hover, #death-modal-content button:hover, #skins-modal-content button:hover, #mobile-controls-toggle:hover, #current-difficulty:hover {
     transform: scale(1.00);
     box-shadow: 0 0 25px rgba(0, 255, 255, 0.5);
 }
@@ -214,7 +214,7 @@ canvas { display: block; }
     margin-bottom: 20px;
     text-shadow: 2px 2px 4px red;
 }
-#skins-modal {
+#skins-modal, #arsenal-modal, #weapon-skins-modal {
     position: fixed;
     top: 0;
     left: 0;
@@ -226,7 +226,7 @@ canvas { display: block; }
     align-items: center;
     z-index: 25;
 }
-#skins-modal-content {
+#skins-modal-content, #arsenal-modal-content, #weapon-skins-modal-content {
     background-color: rgba(50, 50, 50, 0.95);
     padding: 20px;
     border-radius: 10px;
@@ -235,36 +235,81 @@ canvas { display: block; }
     max-height: 80vh;
     overflow-y: auto;
     width: 90%;
-    
     max-width: 1100px;
     box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
 }
 
-#skins-list {
+#skins-list, #arsenal-list, #weapon-skins-list {
     display: grid;
-    
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     gap: 15px;
 }
 
-.skin-item {
-    
+.skin-item, .arsenal-item {
     padding: 10px;
     border-radius: 8px;
     background-color: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    transition: background-color: 0.3s;
+    transition: background-color 0.3s, border-color 0.3s;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
+    position: relative;
 }
 
+.arsenal-item img {
+    width: 120px;
+    height: 80px;
+    object-fit: contain;
+    margin-bottom: 10px;
+}
+.arsenal-item.locked {
+    opacity: 0.6;
+}
+.arsenal-item.selected {
+    border-color: #00ffff;
+    background-color: rgba(0, 255, 255, 0.1);
+}
+.arsenal-item-buttons {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    margin-top: 10px;
+}
+.arsenal-item-buttons button {
+    flex-grow: 1;
+    font-size: 0.9em;
+    padding: 8px 5px;
+}
+
+.lock-info {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.7);
+    color: #ff4444;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 1em;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 8px;
+    pointer-events: none;
+}
+.lock-info > span {
+    font-size: 0.8em;
+    color: #ccc;
+}
 
 .skin-item:hover {
     background-color: rgba(255, 255, 255, 0.1);
 }
-.skin-item span {
+.skin-item span, .arsenal-item span {
     margin-right: 0;
     display: block;
     width: 100%;
@@ -276,21 +321,20 @@ canvas { display: block; }
     background-color: rgba(0, 255, 0, 0.3);
     border: 1px solid limegreen;
 }
-#skins-list h3 {
+#skins-modal-content h2, #arsenal-modal-content h2, #weapon-skins-modal-content h2 {
     margin-top: 20px;
     margin-bottom: 10px;
     color: #00ffff;
-    font-size: 1.2em;
+    font-size: 1.5em;
     text-shadow: 1px 1px 2px #00ffff;
-    
-    grid-column: 1 / -1;
+    text-align: center;
+    width: 100%;
 }
 #skins-list hr {
     margin: 20px 0;
     border: none;
     height: 2px;
     background-color: rgba(255, 255, 255, 0.2);
-    
     grid-column: 1 / -1;
 }
 #version {
@@ -774,7 +818,7 @@ button {
         margin-bottom: 15px;
     }
     
-    #playButton, #skinsButton, #restartButton, #returnToMenuButton, #closeSkinsButton, #toggle-versions, #death-modal-content button, #skins-modal-content button, #mobile-controls-toggle, #current-difficulty, .difficulty-button {
+    #playButton, #skinsButton, #arsenalButton, #restartButton, #returnToMenuButton, #closeSkinsButton, #closeArsenalButton, #closeWeaponSkinsButton, #toggle-versions, #death-modal-content button, #skins-modal-content button, #mobile-controls-toggle, #current-difficulty, .difficulty-button {
         font-size: 1em;
         padding: 8px 15px;
         margin: 5px 0;
@@ -804,22 +848,22 @@ button {
     }
     
     
-    #skins-modal-content {
+    #skins-modal-content, #arsenal-modal-content, #weapon-skins-modal-content {
         padding: 15px;
         width: 95%;
         max-width: 95%;
     }
 
-    #skins-list {
+    #skins-list, #arsenal-list, #weapon-skins-list {
         grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
         gap: 10px;
     }
 
-    .skin-item {
+    .skin-item, .arsenal-item {
         padding: 8px;
     }
     
-    .skin-item span {
+    .skin-item span, .arsenal-item span {
         font-size: 0.9em;
     }
     
@@ -895,7 +939,7 @@ button {
         font-size: 1.6em;
         margin-bottom: 8px;
     }
-    #playButton, #skinsButton, #restartButton, #returnToMenuButton, #closeSkinsButton, #toggle-versions, #death-modal-content button, #skins-modal-content button, #mobile-controls-toggle, #current-difficulty, .difficulty-button {
+    #playButton, #skinsButton, #arsenalButton, #restartButton, #returnToMenuButton, #closeSkinsButton, #closeArsenalButton, #closeWeaponSkinsButton, #toggle-versions, #death-modal-content button, #skins-modal-content button, #mobile-controls-toggle, #current-difficulty, .difficulty-button {
         font-size: 0.9em;
         padding: 6px 12px;
         margin: 4px 0;
@@ -923,6 +967,10 @@ button {
       </tr>
     </thead>
     <tbody>
+	<tr>
+        <td>0.0.1.2</td>
+        <td>Arsenal-update</td>
+      </tr>
 	<tr>
         <td>0.0.1.1</td>
         <td>M16-update</td>
@@ -972,7 +1020,6 @@ button {
 </div>
         <h1>Кибершамыга</h1>
         
-        
         <div id="difficulty-selector">
             <button id="difficulty-toggle" class="difficulty-button">Выбор сложности</button>
             <div id="difficulty-options" style="display: none;">
@@ -982,20 +1029,38 @@ button {
             </div>
         </div>
         
-
         <button id="playButton">Играть</button>
         <button id="mobile-controls-toggle">Мобильное управление:Выкл</button>
         <span id="previous-kills"> Рекорд киллов: <span id="kills-display">0</span></span>
-        <button id="skinsButton">Скины</button>
+        <button id="arsenalButton">Арсенал</button>
+        <button id="skinsButton">Скины HUD</button>
     </div>
 </div>
+
+<div id="arsenal-modal">
+    <div id="arsenal-modal-content">
+        <h2>Арсенал</h2>
+        <div id="arsenal-list"></div>
+        <button id="closeArsenalButton">Закрыть</button>
+    </div>
+</div>
+
 <div id="skins-modal">
     <div id="skins-modal-content">
-        <h2>Выбор скинов</h2>
+        <h2>Скины интерфейса (HUD)</h2>
         <div id="skins-list"></div>
         <button id="closeSkinsButton">Закрыть</button>
     </div>
 </div>
+
+<div id="weapon-skins-modal">
+    <div id="weapon-skins-modal-content">
+        <h2 id="weapon-skins-title">Скины для оружия</h2>
+        <div id="weapon-skins-list"></div>
+        <button id="closeWeaponSkinsButton">Назад в Арсенал</button>
+    </div>
+</div>
+
 <div id="death-modal">
     <div id="death-modal-content">
         <h2>Вы погибли!</h2>
@@ -1003,6 +1068,7 @@ button {
         <button id="returnToMenuButton">Вернуться в меню</button>
     </div>
 </div>
+
 <div id="hud">
     <div>Время: <span id="time">00:00</span></div>
     <div>Киллы: <span id="kills">0</span></div>
@@ -1010,11 +1076,11 @@ button {
 </div>
 <div class="hud-container">
     <div id="weapon1" class="weapon-slot">
-        <img src="https://i.postimg.cc/cL1Ccm2P/image.webp" alt="Gun">
+        <img src="https://i.postimg.cc/cL1Ccm2P/image.webp" alt="Пистолет">
         <div class="weapon-number">1</div>
     </div>
-    <div id="weapon2" class="weapon-slot" style="display: none;">
-        <img src="https://i.postimg.cc/sgDyZcbL/image-1.webp" alt="Vape">
+    <div id="weapon2" class="weapon-slot">
+        <img src="https://i.postimg.cc/sgDyZcbL/image-1.webp" alt="Дудка">
         <div class="weapon-number">2</div>
     </div>
     <div id="weapon3" class="weapon-slot">
@@ -1028,11 +1094,11 @@ button {
 <div id="mobile-hud">
     <div class="mobile-hud-container">
         <div id="mobile-weapon1" class="mobile-weapon-slot">
-            <img src="https://i.postimg.cc/cL1Ccm2P/image.webp" alt="Gun">
+            <img src="https://i.postimg.cc/cL1Ccm2P/image.webp" alt="Пистолет">
             <div class="mobile-weapon-number">1</div>
         </div>
         <div id="mobile-weapon2" class="mobile-weapon-slot" style="display: none;">
-            <img src="https://i.postimg.cc/sgDyZcbL/image-1.webp" alt="Vape">
+            <img src="https://i.postimg.cc/sgDyZcbL/image-1.webp" alt="Дудка">
             <div class="mobile-weapon-number">2</div>
         </div>
 		<div id="mobile-weapon3" class="mobile-weapon-slot">
@@ -1056,8 +1122,8 @@ button {
     </div>
     <div id="action-buttons" class="mobile-control-group">
         <div class="action-button" id="weapon3-button"><img src="https://i.postimg.cc/BbBV8LkH/3333.png" alt="M16"></div>
-        <div class="action-button" id="weapon2-button"><img src="https://i.postimg.cc/sgDyZcbL/image-1.webp" alt="Vape"></div>
-        <div class="action-button" id="weapon1-button"><img src="https://i.postimg.cc/cL1Ccm2P/image.webp" alt="Gun"></div>
+        <div class="action-button" id="weapon2-button"><img src="https://i.postimg.cc/sgDyZcbL/image-1.webp" alt="Дудка"></div>
+        <div class="action-button" id="weapon1-button"><img src="https://i.postimg.cc/cL1Ccm2P/image.webp" alt="Пистолет"></div>
         <div class="action-button" id="reload-button">R</div>
         <div class="action-button" id="jump-button">↑</div>
         <div class="action-button" id="shoot-button">🔥</div>
@@ -1107,9 +1173,6 @@ let isMovingForward = false;
 let isMovingBackward = false;
 let isMovingLeft = false;
 let isMovingRight = false;
-let isDigitKey1Pressed = false;
-let isDigitKey2Pressed = false;
-let isDigitKey3Pressed = false; 
 let isMouseButtonDown = false;
 let shootIntervalTimerId = null;
 
@@ -1155,10 +1218,47 @@ let gameTileMeshes = {};
 const gameTrees = [];
 let gameTreeInstances = {};
 
-let weaponSkins = {
-    default: { name: "Стандартный", unlocked: true, model: null, type: "weapon" },
-    golden: { name: "Золотой", unlocked: false, model: null, type: "weapon" }
+
+let selectedWeapons = ['weapon1', 'weapon3']; 
+let inGameWeapons = []; 
+let vapeUnlocked = false;
+let droppedVapeObject = null;
+
+let selectedWeaponSkins = {
+    weapon1: 'defaultGun',
+    weapon2: 'defaultVape',
+    weapon3: 'defaultM16'
 };
+
+const allGameWeapons = {
+    'weapon1': { 
+        name: 'Пистолет', 
+        icon: 'https://i.postimg.cc/cL1Ccm2P/image.webp',
+        skins: [
+            { id: 'defaultGun', name: 'Стандартный', unlocked: true },
+            { id: 'goldenGun', name: 'Золотой', unlocked: false, requiredKills: 1000 }
+        ]
+    },
+    'weapon2': { 
+        name: 'Дудка', 
+        icon: 'https://i.postimg.cc/sgDyZcbL/image-1.webp', 
+        unlockCondition: () => vapeUnlocked, 
+        unlockText: "Убейте босса, чтобы разблокировать",
+        skins: [
+            { id: 'defaultVape', name: 'Стандартная', unlocked: true },
+            { id: 'goldenVape', name: 'Золотая', unlocked: false, requiredKills: 1500 }
+        ]
+    },
+    'weapon3': { 
+        name: 'M16', 
+        icon: 'https://i.postimg.cc/BbBV8LkH/3333.png',
+        skins: [
+            { id: 'defaultM16', name: 'Стандартная', unlocked: true },
+            { id: 'goldenM16', name: 'Золотая', unlocked: false, requiredKills: 2000 }
+        ]
+    }
+};
+
 let hudSkins = {
     default: { name: "Стандартный HUD", unlocked: true, requiredKills: 0, colors: { border: "cyan", background: "rgba(100, 149, 237, 0.7)", health: "linear-gradient(to right, green, limegreen)", healthBg: "rgba(255, 0, 0, 0.6)", text: "white", healthBorder: "cyan" }},
     neon: { name: "Кибершамыга 2 HUD", unlocked: false, requiredKills: 100, colors: { border: "#00ffff", background: "rgba(0, 0, 51, 0.8)", health: "linear-gradient(to right, #00ff00, #00ffff)", healthBg: "rgba(51, 0, 51, 0.7)", text: "#006ebd", healthBorder: "#00ffff" }},
@@ -1166,16 +1266,9 @@ let hudSkins = {
     futuristic: { name: "Кибертанк HUD", unlocked: false, requiredKills: 1000, colors: { border: "#ffffff", background: "rgba(0, 10, 30, 0.9)", health: "linear-gradient(to right, #00ffaa, #ccffff)", healthBg: "rgba(0, 51, 102, 0.8)", text: "#ffffff", healthBorder: "#ffffff" }},
     military: { name: "Вартандер HUD", unlocked: false, requiredKills: 5000, colors: { border: "#8fbc8f", background: "rgba(51, 51, 51, 0.9)", health: "linear-gradient(to right, #8fbc8f, #cceecc)", healthBg: "rgba(58, 58, 58, 0.8)", text: "#f0e68c", healthBorder: "#8fbc8f" }}
 };
-let currentWeaponSkin = 'default';
+
 let currentHudSkin = 'default';
 let currentEquippedWeaponId = '';
-const availableWeapons = [
-  { id: 'weapon1', name: 'Gun',     equipped: false  },
-  { id: 'weapon2', name: 'Vape',    equipped: false },
-  { id: 'weapon3', name: 'M16A2',   equipped: true }, 
-];
-let bossDroppedVapeWeapon = null;
-let hasPlayerPickedUpVapeWeapon = false;
 
 let gunWeaponGroup, gunWeaponBody, gunWeaponMagazine;
 let gunMuzzleFlash;
@@ -1209,9 +1302,17 @@ let lastM16ShotTime = 0;
 const m16ShotInterval = 0.075;
 const m16ReloadAnimationDuration = 1.5;
 
+const arsenalButtonElement = document.getElementById('arsenalButton');
+const arsenalModalElement = document.getElementById('arsenal-modal');
+const closeArsenalButtonElement = document.getElementById('closeArsenalButton');
+
 const skinsButtonElement = document.getElementById('skinsButton');
 const skinsModalElement = document.getElementById('skins-modal');
 const closeSkinsButtonElement = document.getElementById('closeSkinsButton');
+
+const weaponSkinsModalElement = document.getElementById('weapon-skins-modal');
+const closeWeaponSkinsButtonElement = document.getElementById('closeWeaponSkinsButton');
+
 const toggleVersionButton = document.getElementById('toggle-versions');
 const versionInfoDisplayElement = document.getElementById('version-info');
 const restartButtonElement = document.getElementById('restartButton');
@@ -1247,15 +1348,13 @@ const setActiveDifficultyTab = (selectedDifficulty) => {
 };
 
 function setEquippedWeapon(weaponId) {
-    if (weaponId === 'weapon2' && !hasPlayerPickedUpVapeWeapon) return;
-    if (currentEquippedWeaponId === weaponId) {
+    if (!weaponId || !inGameWeapons.includes(weaponId)) {
+        currentEquippedWeaponId = '';
+    } else if (currentEquippedWeaponId === weaponId) {
         currentEquippedWeaponId = '';
     } else {
         currentEquippedWeaponId = weaponId;
     }
-    availableWeapons.forEach(weapon => {
-        weapon.equipped = (weapon.id === currentEquippedWeaponId);
-    });
 
     switch(currentEquippedWeaponId) {
         case 'weapon1':
@@ -1342,6 +1441,7 @@ function createM16WeaponModel() {
                              if (!child.geometry.attributes.normal) {
                                 child.geometry.computeVertexNormals();
                             }
+                            child.userData.originalMaterial = child.material;
                             const childNameLower = child.name.toLowerCase();
                             if (!magazineFound && childNameLower.includes('plane005')) {
                                 m16Magazine = child;
@@ -1372,6 +1472,7 @@ function createM16WeaponModel() {
                     if (weaponScene) {
                         weaponScene.add(m16WeaponGroup);
                     }
+                    updateM16Skin();
                 },
                 xhr => {},
                 error => console.error('Ошибка загрузки OBJ модели M16:', error)
@@ -1404,6 +1505,7 @@ function createVapeWeaponModel() {
     const vapeBodyGeometry = new THREE.CylinderGeometry(0.1, 0.1, 0.4, 32);
     const vapeBodyMaterial = new THREE.MeshBasicMaterial({ color: 0x0000FF });
     const vapeBody = new THREE.Mesh(vapeBodyGeometry, vapeBodyMaterial);
+    vapeBody.userData.originalMaterial = vapeBody.material;
     vapeBody.position.set(0, 0, 0);
     vapeWeaponGroup.add(vapeBody);
     const mouthPieceGeometry = new THREE.CylinderGeometry(0.05, 0.05, 0.1, 32);
@@ -1418,6 +1520,7 @@ function createVapeWeaponModel() {
     if(weaponScene) {
         weaponScene.add(vapeWeaponGroup);
     }
+    updateVapeSkin();
 }
 
 function updateHUDDisplay() {
@@ -1456,26 +1559,28 @@ function updateHUDDisplay() {
         } else {
             mobileAmmoElement.textContent = '-';
         }
-        availableWeapons.forEach(({ id, equipped }) => {
-            const mobileButton = document.getElementById(`${id}-button`);
+        
+        ['weapon1', 'weapon2', 'weapon3'].forEach(weaponId => {
+            const mobileButton = document.getElementById(`${weaponId}-button`);
             if (!mobileButton) return;
-            if (id === 'weapon2') {
-                mobileButton.style.display = hasPlayerPickedUpVapeWeapon ? 'flex' : 'none';
-            }
-			if (id === 'weapon3') {
-				mobileButton.style.display = 'flex'; 
-			}
-            const isEquipped = currentEquippedWeaponId === id;
-            if (isEquipped) {
-                if (id === 'weapon1') mobileButton.style.backgroundColor = 'rgba(0, 0, 255, 0.8)';
-                else if (id === 'weapon2') mobileButton.style.backgroundColor = 'rgba(255, 0, 255, 0.8)';
-				else if (id === 'weapon3') mobileButton.style.backgroundColor = 'rgba(0, 255, 255, 0.8)';
-            } else {
-				if (id === 'weapon1') mobileButton.style.backgroundColor = 'rgba(0, 0, 255, 0.4)';
-                else if (id === 'weapon2') mobileButton.style.backgroundColor = 'rgba(255, 0, 255, 0.4)';
-				else if (id === 'weapon3') mobileButton.style.backgroundColor = 'rgba(0, 255, 255, 0.4)';
+            
+            const isSelectedForGame = inGameWeapons.includes(weaponId);
+            mobileButton.style.display = isSelectedForGame ? 'flex' : 'none';
+
+            if (isSelectedForGame) {
+                const isEquipped = currentEquippedWeaponId === weaponId;
+                if (isEquipped) {
+                    if (weaponId === 'weapon1') mobileButton.style.backgroundColor = 'rgba(0, 0, 255, 0.8)';
+                    else if (weaponId === 'weapon2') mobileButton.style.backgroundColor = 'rgba(255, 0, 255, 0.8)';
+                    else if (weaponId === 'weapon3') mobileButton.style.backgroundColor = 'rgba(0, 255, 255, 0.8)';
+                } else {
+                    if (weaponId === 'weapon1') mobileButton.style.backgroundColor = 'rgba(0, 0, 255, 0.4)';
+                    else if (weaponId === 'weapon2') mobileButton.style.backgroundColor = 'rgba(255, 0, 255, 0.4)';
+                    else if (weaponId === 'weapon3') mobileButton.style.backgroundColor = 'rgba(0, 255, 255, 0.4)';
+                }
             }
         });
+
     } else {
         const ammoElement = document.getElementById('ammo');
         timeElement.textContent = timeText;
@@ -1489,37 +1594,67 @@ function updateHUDDisplay() {
         } else {
             ammoElement.textContent = '-';
         }
-        availableWeapons.forEach(({ id }) => {
-            const pcSlot = document.getElementById(id);
-            if (!pcSlot) return;
-            if (id === 'weapon2') {
-                pcSlot.style.display = hasPlayerPickedUpVapeWeapon ? 'flex' : 'none';
-            }
-			if (id === 'weapon3') {
-				pcSlot.style.display = 'flex'; 
-			}
-            const check = pcSlot.querySelector('.checkmark');
-            const isEquipped = currentEquippedWeaponId === id;
-            if (isEquipped) {
-                pcSlot.classList.add('equipped');
-                pcSlot.style.backgroundColor = '';
-                if (!check) {
-                    const newCheck = document.createElement('div');
-                    newCheck.className = 'checkmark';
-                    newCheck.style.backgroundColor = 'limegreen';
-                    pcSlot.appendChild(newCheck);
-                } else if (check) {
-                    check.style.backgroundColor = 'limegreen';
+
+        for (let i = 1; i <= 3; i++) {
+            const pcSlot = document.getElementById(`weapon${i}`);
+            if (!pcSlot) continue;
+
+            if (i <= inGameWeapons.length) {
+                const weaponId = inGameWeapons[i-1];
+                const check = pcSlot.querySelector('.checkmark');
+                const isEquipped = currentEquippedWeaponId === weaponId;
+                
+                if (isEquipped) {
+                    pcSlot.classList.add('equipped');
+                    pcSlot.style.backgroundColor = '';
+                    if (!check) {
+                        const newCheck = document.createElement('div');
+                        newCheck.className = 'checkmark';
+                        newCheck.style.backgroundColor = 'limegreen';
+                        pcSlot.appendChild(newCheck);
+                    } else if (check) {
+                        check.style.backgroundColor = 'limegreen';
+                    }
+                } else {
+                    pcSlot.classList.remove('equipped');
+                    pcSlot.style.backgroundColor = 'rgba(255, 0, 0, 0.4)';
+                    if (check) {
+                        pcSlot.removeChild(check);
+                    }
                 }
-            } else {
-                pcSlot.classList.remove('equipped');
-                pcSlot.style.backgroundColor = 'rgba(255, 0, 0, 0.4)';
-                if (check) {
-                    pcSlot.removeChild(check);
-                }
             }
-        });
+        }
     }
+}
+
+function setupInGameHUD() {
+    inGameWeapons.sort();
+
+    
+    for (let i = 1; i <= 3; i++) {
+        const pcSlot = document.getElementById(`weapon${i}`);
+        if (!pcSlot) continue;
+
+        if (i <= inGameWeapons.length) {
+            const weaponId = inGameWeapons[i-1];
+            const weaponInfo = allGameWeapons[weaponId];
+            pcSlot.style.display = 'flex';
+            pcSlot.querySelector('img').src = weaponInfo.icon;
+            pcSlot.querySelector('img').alt = weaponInfo.name;
+        } else {
+            pcSlot.style.display = 'none';
+        }
+    }
+
+    
+    ['weapon1', 'weapon2', 'weapon3'].forEach(id => {
+        const button = document.getElementById(`${id}-button`);
+        if (button) {
+            button.style.display = inGameWeapons.includes(id) ? 'flex' : 'none';
+        }
+    });
+
+    updateHUDDisplay();
 }
 
 function createGunWeaponModel() {
@@ -1572,12 +1707,48 @@ function createBossWeaponModel() {
 }
 
 function updateGunSkin() {
-    if (currentWeaponSkin === 'golden') {
+    if (!gunWeaponBody) return;
+    const skinId = selectedWeaponSkins.weapon1;
+    if (skinId === 'goldenGun') {
         gunWeaponBody.material.color.set(0xFFD700);
     } else {
         gunWeaponBody.material.color.set(0x333333);
     }
 }
+
+function updateVapeSkin() {
+    if (!vapeWeaponGroup) return;
+    const skinId = selectedWeaponSkins.weapon2;
+    const vapeBody = vapeWeaponGroup.getObjectByProperty('type', 'Mesh'); 
+    if (!vapeBody || !vapeBody.userData.originalMaterial) return;
+
+    if (skinId === 'goldenVape') {
+        const goldenMaterial = vapeBody.userData.originalMaterial.clone();
+        goldenMaterial.color.set(0xFFD700);
+        vapeBody.material = goldenMaterial;
+    } else {
+        vapeBody.material = vapeBody.userData.originalMaterial;
+    }
+}
+
+function updateM16Skin() {
+    if (!m16WeaponGroup) return;
+    const skinId = selectedWeaponSkins.weapon3;
+    const isGolden = skinId === 'goldenM16';
+
+    m16WeaponGroup.traverse(child => {
+        if (child.isMesh && child.userData.originalMaterial) {
+            if (isGolden) {
+                const goldenMaterial = child.userData.originalMaterial.clone();
+                goldenMaterial.color.set(0xFFD700);
+                child.material = goldenMaterial;
+            } else {
+                child.material = child.userData.originalMaterial;
+            }
+        }
+    });
+}
+
 
 function createHudSkinPreview(skinKey) {
     const skin = hudSkins[skinKey];
@@ -1607,49 +1778,143 @@ function createHudSkinPreview(skinKey) {
     return previewContainer;
 }
 
-function updateSkinsMenuDisplay() {
-    const skinsList = document.getElementById('skins-list');
-    skinsList.innerHTML = '';
-    let weaponSectionTitle = document.createElement('h3');
-    weaponSectionTitle.textContent = 'Скины оружия';
-    skinsList.appendChild(weaponSectionTitle);
-    for (let key in weaponSkins) {
-        let skin = weaponSkins[key];
+function updateArsenalModal() {
+    const arsenalList = document.getElementById('arsenal-list');
+    arsenalList.innerHTML = '';
+
+    for (const weaponId in allGameWeapons) {
+        const weapon = allGameWeapons[weaponId];
+        const isUnlocked = !weapon.unlockCondition || weapon.unlockCondition();
+        const isSelected = selectedWeapons.includes(weaponId);
+
+        let weaponDiv = document.createElement('div');
+        weaponDiv.className = 'arsenal-item';
+        if (isSelected) weaponDiv.classList.add('selected');
+        if (!isUnlocked) weaponDiv.classList.add('locked');
+
+        weaponDiv.innerHTML = `
+            <img src="${weapon.icon}" alt="${weapon.name}">
+            <span>${weapon.name}</span>
+        `;
+
+        const buttonContainer = document.createElement('div');
+        buttonContainer.className = 'arsenal-item-buttons';
+        
+        const selectButton = document.createElement('button');
+        selectButton.textContent = isSelected ? 'Убрать' : 'Выбрать';
+        selectButton.addEventListener('click', () => {
+            const index = selectedWeapons.indexOf(weaponId);
+            if (index > -1) {
+                if (selectedWeapons.length > 1) { 
+                    selectedWeapons.splice(index, 1);
+                }
+            } else {
+                if (selectedWeapons.length < 3) {
+                    selectedWeapons.push(weaponId);
+                }
+            }
+            saveGameData();
+            updateArsenalModal();
+        });
+        buttonContainer.appendChild(selectButton);
+
+        if (weapon.skins && weapon.skins.length > 0) {
+            const skinsButton = document.createElement('button');
+            skinsButton.textContent = 'Скины';
+            skinsButton.addEventListener('click', () => {
+                renderWeaponSkinsModal(weaponId);
+            });
+            buttonContainer.appendChild(skinsButton);
+        }
+
+        weaponDiv.appendChild(buttonContainer);
+
+        if (!isUnlocked) {
+            let lockInfo = document.createElement('div');
+            lockInfo.className = 'lock-info';
+            lockInfo.innerHTML = `🔒<br><span>${weapon.unlockText}</span>`;
+            weaponDiv.appendChild(lockInfo);
+            selectButton.disabled = true;
+			
+			
+            
+            const skinsButton = Array.from(buttonContainer.children).find(btn => btn.textContent === 'Скины');
+            if (skinsButton) {
+                skinsButton.disabled = true;
+            }
+			
+        }
+
+        arsenalList.appendChild(weaponDiv);
+    }
+}
+
+function renderWeaponSkinsModal(weaponId) {
+    const weapon = allGameWeapons[weaponId];
+    if (!weapon) return;
+
+    const weaponSkinsList = document.getElementById('weapon-skins-list');
+    const weaponSkinsTitle = document.getElementById('weapon-skins-title');
+    weaponSkinsList.innerHTML = '';
+    weaponSkinsTitle.textContent = `Скины для: ${weapon.name}`;
+
+    weapon.skins.forEach(skin => {
+        let isUnlocked = skin.unlocked || (skin.requiredKills && recordKillCount >= skin.requiredKills);
+        
         let skinDiv = document.createElement('div');
         skinDiv.className = 'skin-item';
+        
         let skinName = document.createElement('span');
         skinName.textContent = skin.name;
+
         let selectButton = document.createElement('button');
-        selectButton.textContent = 'Выбрать';
-        selectButton.disabled = !skin.unlocked;
-        selectButton.addEventListener('click', function () {
-            currentWeaponSkin = key;
-            skinsModalElement.style.display = 'none';
-            updateGunSkin();
-            updateSkinsMenuDisplay();
-        });
-        if (key === currentWeaponSkin) {
+        selectButton.disabled = !isUnlocked;
+
+        if (skin.id === selectedWeaponSkins[weaponId]) {
             skinDiv.classList.add('selected-skin');
             selectButton.textContent = 'Выбрано';
             selectButton.classList.add('selected-button');
         } else {
             selectButton.textContent = 'Выбрать';
-            selectButton.classList.remove('selected-button');
         }
-        if (!skin.unlocked) {
+
+        selectButton.addEventListener('click', function () {
+            selectedWeaponSkins[weaponId] = skin.id;
+            saveGameData();
+            switch (weaponId) {
+                case 'weapon1':
+                    updateGunSkin();
+                    break;
+                case 'weapon2':
+                    updateVapeSkin();
+                    break;
+                case 'weapon3':
+                    updateM16Skin();
+                    break;
+            }
+            renderWeaponSkinsModal(weaponId);
+        });
+
+        if (!isUnlocked) {
             let lockSpan = document.createElement('span');
-            lockSpan.textContent = '🔒 Требуется 1000 киллов';
+            lockSpan.className = 'required-kills-text';
+            lockSpan.textContent = `🔒 Требуется ${skin.requiredKills} киллов`;
             skinDiv.appendChild(lockSpan);
         }
+
         skinDiv.appendChild(skinName);
         skinDiv.appendChild(selectButton);
-        skinsList.appendChild(skinDiv);
-    }
-    let separator = document.createElement('hr');
-    skinsList.appendChild(separator);
-    let hudSectionTitle = document.createElement('h3');
-    hudSectionTitle.textContent = 'Скины HUD';
-    skinsList.appendChild(hudSectionTitle);
+        weaponSkinsList.appendChild(skinDiv);
+    });
+
+    arsenalModalElement.style.display = 'none';
+    weaponSkinsModalElement.style.display = 'flex';
+}
+
+function updateHudSkinsModal() {
+    const skinsList = document.getElementById('skins-list');
+    skinsList.innerHTML = '';
+
     for (let key in hudSkins) {
         let skin = hudSkins[key];
         let skinDiv = document.createElement('div');
@@ -1666,7 +1931,9 @@ function updateSkinsMenuDisplay() {
         buttonContainer.style.display = 'flex';
         buttonContainer.style.flexDirection = 'column';
         buttonContainer.style.alignItems = 'center';
-        if (!skin.unlocked && recordKillCount < skin.requiredKills) {
+
+        const isUnlocked = skin.unlocked || recordKillCount >= skin.requiredKills;
+        if (!isUnlocked) {
             let lockSpan = document.createElement('div');
             lockSpan.textContent = `🔒 Требуется ${skin.requiredKills} киллов`;
             lockSpan.className = 'required-kills-text';
@@ -1674,15 +1941,16 @@ function updateSkinsMenuDisplay() {
         }
         let selectButton = document.createElement('button');
         selectButton.textContent = key === currentHudSkin ? 'Выбрано' : 'Выбрать';
-        selectButton.disabled = !skin.unlocked && recordKillCount < skin.requiredKills;
+        selectButton.disabled = !isUnlocked;
         selectButton.className = key === currentHudSkin ? 'selected-button' : '';
         buttonContainer.appendChild(selectButton);
         skinDiv.appendChild(buttonContainer);
         selectButton.addEventListener('click', function () {
-            if (recordKillCount >= skin.requiredKills || skin.unlocked) {
+            if (isUnlocked) {
                 currentHudSkin = key;
                 applyHudSkin(key);
-                updateSkinsMenuDisplay();
+                saveGameData();
+                updateHudSkinsModal();
             }
         });
         if (key === currentHudSkin) {
@@ -1725,38 +1993,63 @@ function applyHudSkin(skinKey) {
         slot.style.borderColor = skin.colors.border;
         slot.style.borderImage = 'none';
     });
-    localStorage.setItem('selectedHudSkin', skinKey);
 }
 
-function saveSkinsUnlockStatus() {
-    localStorage.setItem('skins', JSON.stringify({
-        goldenUnlocked: weaponSkins.golden.unlocked,
-        selectedHudSkin: currentHudSkin,
-		neonHUDUnlocked: hudSkins.neon.unlocked,
-		retroHUDUnlocked: hudSkins.retro.unlocked,
-		futuristicHUDUnlocked: hudSkins.futuristic.unlocked,
-		militaryHUDUnlocked: hudSkins.military.unlocked,
-    }));
+function saveGameData() {
+    localStorage.setItem('killsRecord', recordKillCount);
+    const dataToSave = {
+        vapeUnlocked: vapeUnlocked,
+        selectedWeapons: selectedWeapons,
+        selectedWeaponSkins: selectedWeaponSkins,
+        currentHudSkin: currentHudSkin,
+        
+        goldenGunUnlocked: allGameWeapons.weapon1.skins.find(s => s.id === 'goldenGun').unlocked,
+        goldenVapeUnlocked: allGameWeapons.weapon2.skins.find(s => s.id === 'goldenVape').unlocked,
+        goldenM16Unlocked: allGameWeapons.weapon3.skins.find(s => s.id === 'goldenM16').unlocked,
+        neonHUDUnlocked: hudSkins.neon.unlocked,
+        retroHUDUnlocked: hudSkins.retro.unlocked,
+        futuristicHUDUnlocked: hudSkins.futuristic.unlocked,
+        militaryHUDUnlocked: hudSkins.military.unlocked
+    };
+    localStorage.setItem('gameData', JSON.stringify(dataToSave));
 }
 
-function loadSkinsUnlockStatus() {
-    let storedSkins = localStorage.getItem('skins');
-    if (storedSkins) {
-        let data = JSON.parse(storedSkins);
-        weaponSkins.golden.unlocked = data.goldenUnlocked || false;
-        if (data.selectedHudSkin && hudSkins[data.selectedHudSkin]) {
-            currentHudSkin = data.selectedHudSkin;
-            applyHudSkin(currentHudSkin);
-        }
-		hudSkins.neon.unlocked = data.neonHUDUnlocked || false;
-		hudSkins.retro.unlocked = data.retroHUDUnlocked || false;
-		hudSkins.futuristic.unlocked = data.futuristicHUDUnlocked || false;
-		hudSkins.military.unlocked = data.militaryHUDUnlocked || false;
-		if (recordKillCount >= hudSkins.neon.requiredKills) hudSkins.neon.unlocked = true;
-		if (recordKillCount >= hudSkins.retro.requiredKills) hudSkins.retro.unlocked = true;
-		if (recordKillCount >= hudSkins.futuristic.requiredKills) hudSkins.futuristic.unlocked = true;
-		if (recordKillCount >= hudSkins.military.requiredKills) hudSkins.military.unlocked = true;
+function loadGameData() {
+    const storedKillsRecord = localStorage.getItem('killsRecord');
+    if (storedKillsRecord) {
+        recordKillCount = parseInt(storedKillsRecord, 10);
     }
+
+    const storedData = localStorage.getItem('gameData');
+    if (storedData) {
+        const data = JSON.parse(storedData);
+        vapeUnlocked = data.vapeUnlocked || false;
+        currentHudSkin = data.currentHudSkin || 'default';
+        
+        if (data.selectedWeaponSkins) {
+            selectedWeaponSkins = data.selectedWeaponSkins;
+        }
+        
+        if (Array.isArray(data.selectedWeapons) && data.selectedWeapons.length > 0) {
+            selectedWeapons = data.selectedWeapons;
+        }
+        
+        allGameWeapons.weapon1.skins.find(s => s.id === 'goldenGun').unlocked = data.goldenGunUnlocked || false;
+        allGameWeapons.weapon2.skins.find(s => s.id === 'goldenVape').unlocked = data.goldenVapeUnlocked || false;
+        allGameWeapons.weapon3.skins.find(s => s.id === 'goldenM16').unlocked = data.goldenM16Unlocked || false;
+        hudSkins.neon.unlocked = data.neonHUDUnlocked || false;
+        hudSkins.retro.unlocked = data.retroHUDUnlocked || false;
+        hudSkins.futuristic.unlocked = data.futuristicHUDUnlocked || false;
+        hudSkins.military.unlocked = data.militaryHUDUnlocked || false;
+    }
+
+    if (recordKillCount >= 1000) allGameWeapons.weapon1.skins.find(s => s.id === 'goldenGun').unlocked = false;
+    if (recordKillCount >= 1500) allGameWeapons.weapon2.skins.find(s => s.id === 'goldenVape').unlocked = false;
+    if (recordKillCount >= 2000) allGameWeapons.weapon3.skins.find(s => s.id === 'goldenM16').unlocked = false;
+    if (recordKillCount >= hudSkins.neon.requiredKills) hudSkins.neon.unlocked = true;
+    if (recordKillCount >= hudSkins.retro.requiredKills) hudSkins.retro.unlocked = true;
+    if (recordKillCount >= hudSkins.futuristic.requiredKills) hudSkins.futuristic.unlocked = true;
+    if (recordKillCount >= hudSkins.military.requiredKills) hudSkins.military.unlocked = true;
 }
 
 function getRandomSpawnPosition() {
@@ -1846,21 +2139,9 @@ function showDeathModal() {
     document.getElementById('crosshair').style.display = 'none';
 }
 
-function saveGameProgress() {
-    localStorage.setItem('killsRecord', recordKillCount);
-}
-
-function loadGameProgress() {
-    const storedKillsRecord = localStorage.getItem('killsRecord');
-    if (storedKillsRecord) {
-        recordKillCount = parseInt(storedKillsRecord, 10);
-    }
-}
-
 function updateMenuDisplay() {
     const killsDisplay = document.getElementById('kills-display');
     killsDisplay.textContent = recordKillCount;
-    updateSkinsMenuDisplay();
 }
 
 function updateHealthBarDisplay() {
@@ -2022,7 +2303,7 @@ function createBossEnemy() {
     createBossWeaponModel();
 }
 
-function dropBossWeapon(position) {
+function dropVapeWeapon(position) {
     const droppedWeapon = new THREE.Group();
     const vapeGeometry = new THREE.CylinderGeometry(0.1, 0.1, 0.4, 32);
     const vapeMaterial = new THREE.MeshBasicMaterial({ color: 0x0000ff });
@@ -2030,15 +2311,14 @@ function dropBossWeapon(position) {
     vapeMesh.rotation.x = Math.PI / 2;
     droppedWeapon.add(vapeMesh);
     const ringGeometry = new THREE.RingGeometry(0.5, 0.7, 32);
-    const ringMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000, side: THREE.DoubleSide, transparent: true, opacity: 0.6 });
+    const ringMaterial = new THREE.MeshBasicMaterial({ color: 0xff00ff, side: THREE.DoubleSide, transparent: true, opacity: 0.6 });
     const ringMesh = new THREE.Mesh(ringGeometry, ringMaterial);
     ringMesh.rotation.x = -Math.PI / 2;
     ringMesh.position.y = -0.2;
     droppedWeapon.add(ringMesh);
     droppedWeapon.position.copy(position);
-    droppedWeapon.userData.isDroppedWeapon = true;
     gameScene.add(droppedWeapon);
-    return droppedWeapon;
+    droppedVapeObject = droppedWeapon;
 }
 
 function createSwordWeaponModel() {
@@ -2200,8 +2480,7 @@ function createVapeSmokeEffect() {
 
 
 function shootWeapon() {
-    const currentWeapon = availableWeapons.find(weapon => weapon.id === currentEquippedWeaponId);
-    if (!currentWeapon || !currentWeapon.equipped) return;
+    if (!currentEquippedWeaponId) return;
     
     if (currentEquippedWeaponId === 'weapon1') {
         if (currentGunAmmo <= 0 || isGunReloading) return;
@@ -2263,7 +2542,6 @@ function handleHitscanFire(damage) {
                  if (bossHealth <= 0) {
                      killCount++;
                      updateHUDDisplay();
-                     if (!hasPlayerPickedUpVapeWeapon) bossDroppedVapeWeapon = dropBossWeapon(gameBoss.position);
                      endBossFight();
                      generateEnemies();
                  }
@@ -2369,6 +2647,8 @@ function initScene() {
 
     generateTilesAroundPlayer();
     updateGunSkin();
+    updateVapeSkin();
+    updateM16Skin();
     updateHUDDisplay();
     applyHudSkin(currentHudSkin);
 }
@@ -2473,16 +2753,20 @@ function animate() {
     if (isGameCurrentlyActive) {
         updateBullets(deltaTime);
         
-        if (bossDroppedVapeWeapon && !hasPlayerPickedUpVapeWeapon) {
-            const distanceToWeapon = playerObject.position.distanceTo(bossDroppedVapeWeapon.position);
-            if (distanceToWeapon < 2) {
-                hasPlayerPickedUpVapeWeapon = true;
-                gameScene.remove(bossDroppedVapeWeapon);
-                bossDroppedVapeWeapon = null;
-                updateHUDDisplay();
+        
+        if (droppedVapeObject) {
+            const distanceToVape = playerObject.position.distanceTo(droppedVapeObject.position);
+            if (distanceToVape < 2 && !inGameWeapons.includes('weapon2')) { 
+                inGameWeapons.push('weapon2');
+                
+                gameScene.remove(droppedVapeObject);
+                droppedVapeObject = null;
+                
+                setupInGameHUD();
+                setEquippedWeapon('weapon2');
             }
         }
-        
+
         for (let i = gameBullets.length - 1; i >= 0; i--) {
             const bullet = gameBullets[i];
             if (bullet.userData.isBossBullet) {
@@ -2527,7 +2811,6 @@ function animate() {
                          if (bossHealth <= 0) {
                              killCount++;
                              updateHUDDisplay();
-                             if (!hasPlayerPickedUpVapeWeapon) bossDroppedVapeWeapon = dropBossWeapon(gameBoss.position);
                              endBossFight();
                              generateEnemies();
                          }
@@ -2813,7 +3096,10 @@ function startGame() {
     const deathModalElement = document.getElementById('death-modal');
     deathModalElement.style.display = 'none';
 
+    inGameWeapons = [...selectedWeapons];
+    
     updateCameraFov();
+    setupInGameHUD();
 
     if (isMobileControlsEnabled) {
         document.getElementById('mobile-hud').style.display = 'flex';
@@ -2831,13 +3117,12 @@ function startGame() {
         document.getElementById('mobile-controls').style.display = 'none';
     }
     document.getElementById('crosshair').style.display = 'block';
-    hasPlayerPickedUpVapeWeapon = false;
-    bossDroppedVapeWeapon = null;
-    currentEquippedWeaponId = isMobileControlsEnabled ? '' : 'weapon1';
+    
+    currentEquippedWeaponId = isMobileControlsEnabled ? '' : (inGameWeapons[0] || '');
     setEquippedWeapon(currentEquippedWeaponId);
+    
     const settings = difficultySettings[currentDifficulty];
     baseEnemyHealth = settings.enemyHealth;
-    
     baseBossHealth = settings.bossHealth;
     killCount = 0;
     currentPlayerHealth = 100;
@@ -2847,6 +3132,7 @@ function startGame() {
     currentEnemyDamage = 1;
     currentBossDamage = 2;
     gameBoss = null;
+    droppedVapeObject = null;
 
     updateHealthBarDisplay();
     currentGunAmmo = gunMagazineSize;
@@ -2880,14 +3166,20 @@ function startGame() {
 }
 
 function endBossFight() {
-    if (gameBoss && gameBoss.userData.healthBar) {
+    const bossPosition = gameBoss.position.clone();
+    if (gameBoss.userData.healthBar) {
         gameScene.remove(gameBoss.userData.healthBar);
-        gameBoss.userData.healthBar = null;
     }
-    if (gameBoss) {
-        gameScene.remove(gameBoss);
-        gameBoss = null;
+    gameScene.remove(gameBoss);
+    gameBoss = null;
+    
+    if (!vapeUnlocked) {
+        vapeUnlocked = true;
+        saveGameData();
     }
+
+    dropVapeWeapon(bossPosition);
+
     isBossAlreadySpawned = false;
     currentBossLevel++;
     timeToNextBossSpawn = currentBossLevel * 300;
@@ -2917,24 +3209,49 @@ function generateEnemies() {
 function endGame() {
     gameEndTimeEpoch = new Date().getTime();
     isGameCurrentlyActive = false;
+
+    
+    
+    isMovingForward = false;
+    isMovingBackward = false;
+    isMovingLeft = false;
+    isMovingRight = false;
+    isMouseButtonDown = false;
+    if (shootIntervalTimerId) {
+        clearInterval(shootIntervalTimerId);
+        shootIntervalTimerId = null;
+    }
+    
+    isJoystickActive = false;
+    joystickDeltaX = 0;
+    joystickDeltaY = 0;
+    const joystickThumb = document.getElementById('joystick-thumb');
+    if (joystickThumb) {
+        joystickThumb.style.transform = 'translate(0px, 0px)';
+    }
+    
+
     document.exitPointerLock();
     document.getElementById('crosshair').style.display = 'none';
-    hasPlayerPickedUpVapeWeapon = false;
     currentEquippedWeaponId = '';
     updateHUDDisplay();
     if (killCount > recordKillCount) {
         recordKillCount = killCount;
-        saveGameProgress();
     }
     if (recordKillCount >= 1000) {
-        weaponSkins.golden.unlocked = true;
-        saveSkinsUnlockStatus();
+        allGameWeapons.weapon1.skins.find(s => s.id === 'goldenGun').unlocked = false;
+    }
+    if (recordKillCount >= 1500) {
+        allGameWeapons.weapon2.skins.find(s => s.id === 'goldenVape').unlocked = false;
+    }
+    if (recordKillCount >= 2000) {
+        allGameWeapons.weapon3.skins.find(s => s.id === 'goldenM16').unlocked = false;
     }
 	if (recordKillCount >= hudSkins.neon.requiredKills) hudSkins.neon.unlocked = true;
 	if (recordKillCount >= hudSkins.retro.requiredKills) hudSkins.retro.unlocked = true;
 	if (recordKillCount >= hudSkins.futuristic.requiredKills) hudSkins.futuristic.unlocked = true;
 	if (recordKillCount >= hudSkins.military.requiredKills) hudSkins.military.unlocked = true;
-	saveSkinsUnlockStatus();
+	saveGameData();
     updateMenuDisplay();
     document.getElementById('mobile-controls').style.display = 'none';
 }
@@ -2948,6 +3265,10 @@ function clearGameObjects() {
         }
         gameScene.remove(gameBoss);
         gameBoss = null;
+    }
+    if (droppedVapeObject) {
+        gameScene.remove(droppedVapeObject);
+        droppedVapeObject = null;
     }
     gameBullets.forEach(bullet => gameScene.remove(bullet));
     gameBullets.length = 0;
@@ -2966,16 +3287,34 @@ function clearGameObjects() {
     gameTrees.length = 0;
 }
 
-skinsButtonElement.addEventListener('click', (event) => {
+
+arsenalButtonElement.addEventListener('click', (event) => {
     event.stopPropagation();
-    skinsModalElement.style.display = 'flex';
-    updateSkinsMenuDisplay();
+    updateArsenalModal();
+    arsenalModalElement.style.display = 'flex';
+});
+closeArsenalButtonElement.addEventListener('click', (event) => {
+    event.stopPropagation();
+    arsenalModalElement.style.display = 'none';
 });
 
+skinsButtonElement.addEventListener('click', (event) => {
+    event.stopPropagation();
+    updateHudSkinsModal();
+    skinsModalElement.style.display = 'flex';
+});
 closeSkinsButtonElement.addEventListener('click', (event) => {
     event.stopPropagation();
     skinsModalElement.style.display = 'none';
 });
+
+closeWeaponSkinsButtonElement.addEventListener('click', (event) => {
+    event.stopPropagation();
+    weaponSkinsModalElement.style.display = 'none';
+    updateArsenalModal();
+    arsenalModalElement.style.display = 'flex'; 
+});
+
 
 document.addEventListener('DOMContentLoaded', () => {
     const versionInfoElement = document.getElementById('version-info');
@@ -3036,12 +3375,13 @@ document.addEventListener('DOMContentLoaded', () => {
     joystickBase.addEventListener('touchstart', handleJoystickStart, { passive: false });
     joystickBase.addEventListener('touchmove', handleJoystickMove, { passive: false });
     joystickBase.addEventListener('touchend', handleJoystickEnd, { passive: false });
-    shootButton.addEventListener('touchstart', (e) => { e.preventDefault(); if (isGameCurrentlyActive) { isMouseButtonDown = true; shootWeapon(); const currentWeapon = availableWeapons.find(w => w.id === currentEquippedWeaponId); if (currentWeapon) { let interval = 1000; if (currentWeapon.id === 'weapon1') interval = gunShotInterval * 1000; if (currentWeapon.id === 'weapon3') interval = m16ShotInterval * 1000; if (interval < 1000) shootIntervalTimerId = setInterval(shootWeapon, interval); }}}, { passive: false });
+    shootButton.addEventListener('touchstart', (e) => { e.preventDefault(); if (isGameCurrentlyActive) { isMouseButtonDown = true; shootWeapon(); if (currentEquippedWeaponId === 'weapon1' || currentEquippedWeaponId === 'weapon3') { const interval = currentEquippedWeaponId === 'weapon1' ? gunShotInterval * 1000 : m16ShotInterval * 1000; shootIntervalTimerId = setInterval(shootWeapon, interval); }}}, { passive: false });
     shootButton.addEventListener('touchend', (e) => { e.preventDefault(); isMouseButtonDown = false; clearInterval(shootIntervalTimerId); shootIntervalTimerId = null; }, { passive: false });
     jumpButton.addEventListener('touchstart', (e) => { e.preventDefault(); if (isGameCurrentlyActive && canPlayerJump && !isPlayerJumping) { isPlayerJumping = true; canPlayerJump = false; playerVelocity.y = playerJumpStrength; }}, { passive: false });
     reloadButton.addEventListener('touchstart', (e) => { e.preventDefault(); if (isGameCurrentlyActive) reloadGun(); }, { passive: false });
+    
     weapon1Button.addEventListener('touchstart', (e) => { e.preventDefault(); if (isGameCurrentlyActive) setEquippedWeapon('weapon1'); }, { passive: false });
-    weapon2Button.addEventListener('touchstart', (e) => { e.preventDefault(); if (isGameCurrentlyActive && hasPlayerPickedUpVapeWeapon) setEquippedWeapon('weapon2'); }, { passive: false });
+    weapon2Button.addEventListener('touchstart', (e) => { e.preventDefault(); if (isGameCurrentlyActive) setEquippedWeapon('weapon2'); }, { passive: false });
 	weapon3Button.addEventListener('touchstart', (e) => { e.preventDefault(); if (isGameCurrentlyActive) setEquippedWeapon('weapon3'); }, { passive: false });
 });
 
@@ -3065,9 +3405,9 @@ document.addEventListener('keydown', (event) => {
         case 'KeyD': isMovingRight = true; break;
         case 'KeyR': reloadGun(); break;
         case 'Space': if (canPlayerJump && !isPlayerJumping) { isPlayerJumping = true; canPlayerJump = false; playerVelocity.y = playerJumpStrength; } break;
-        case 'Digit1': setEquippedWeapon('weapon1'); isDigitKey1Pressed = true; break;
-        case 'Digit2': if(hasPlayerPickedUpVapeWeapon) { setEquippedWeapon('weapon2'); isDigitKey2Pressed = true; } break;
-        case 'Digit3': setEquippedWeapon('weapon3'); isDigitKey3Pressed = true; break;
+        case 'Digit1': if (inGameWeapons[0]) setEquippedWeapon(inGameWeapons[0]); break;
+        case 'Digit2': if (inGameWeapons[1]) setEquippedWeapon(inGameWeapons[1]); break;
+        case 'Digit3': if (inGameWeapons[2]) setEquippedWeapon(inGameWeapons[2]); break;
     }
 });
 
@@ -3079,9 +3419,6 @@ document.addEventListener('keyup', (event) => {
         case 'KeyS': isMovingBackward = false; break;
         case 'KeyA': isMovingLeft = false; break;
         case 'KeyD': isMovingRight = false; break;
-        case 'Digit1': isDigitKey1Pressed = false; break;
-        case 'Digit2': isDigitKey2Pressed = false; break;
-        case 'Digit3': isDigitKey3Pressed = false; break;
     }
 });
 
@@ -3090,12 +3427,9 @@ document.addEventListener('mousedown', (event) => {
         event.preventDefault();
         isMouseButtonDown = true;
         shootWeapon();
-        const currentWeapon = availableWeapons.find(weapon => weapon.id === currentEquippedWeaponId);
-        if (currentWeapon) {
-            let interval = 1000;
-            if (currentWeapon.id === 'weapon1') interval = gunShotInterval * 1000;
-            if (currentWeapon.id === 'weapon3') interval = m16ShotInterval * 1000;
-            if(interval < 1000) shootIntervalTimerId = setInterval(shootWeapon, interval);
+        if (currentEquippedWeaponId === 'weapon1' || currentEquippedWeaponId === 'weapon3') {
+            const interval = currentEquippedWeaponId === 'weapon1' ? gunShotInterval * 1000 : m16ShotInterval * 1000;
+            shootIntervalTimerId = setInterval(shootWeapon, interval);
         }
     }
 });
@@ -3110,7 +3444,7 @@ document.addEventListener('mouseup', (event) => {
 
 document.addEventListener('pointerlockchange', pointerLockChange, false);
 document.addEventListener('click', (event) => {
-    if (event.target.tagName === 'BUTTON') {
+    if (event.target.tagName === 'BUTTON' || event.target.closest('.arsenal-item')) {
         return;
     }
 
@@ -3176,8 +3510,7 @@ window.addEventListener('resize', () => {
     }
 }, false);
 
-loadGameProgress();
-loadSkinsUnlockStatus();
+loadGameData();
 initScene();
 applyHudSkin(currentHudSkin);
 updateGunSkin();
@@ -3187,7 +3520,6 @@ updateHUDDisplay();
 animate();
 
 </script>
-<div id="version">Версия 0.0.1.1(M16-update)</div>
+<div id="version">Версия 0.0.1.2(Arsenal-update)</div>
 </body>
 </html>
-
